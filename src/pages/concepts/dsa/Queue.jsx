@@ -25,8 +25,14 @@ export const QueueA = forwardRef((props, ref) => {
         <div className="concept-tag" style={{ background: "#e63946" }}>DSA</div>
         <h2 className="concept-title">Queue</h2>
         <p className="concept-def">
-          <strong>FIFO</strong> — First In First Out. Enqueue at rear; Dequeue from front.
+          A queue is like a coffee shop line — first in, first served. That&apos;s <strong>FIFO</strong>: First In, First Out.
         </p>
+        <ul className="fact-list">
+          <li><strong>Enqueue:</strong> add item to the rear — O(1)</li>
+          <li><strong>Dequeue:</strong> remove item from the front — O(1)</li>
+          <li><strong>Peek:</strong> read front item without removing — O(1)</li>
+          <li><strong>Opposite of Stack:</strong> Stack is LIFO; Queue is FIFO</li>
+        </ul>
         <p className="concept-formula">Operations: enqueue O(1) · dequeue O(1) · peek O(1)</p>
 
         <div className="queue-viz">
@@ -53,20 +59,21 @@ export const QueueA = forwardRef((props, ref) => {
 
         <h3 className="concept-subtitle" style={{ marginTop: "1rem" }}>Types of Queue</h3>
         <ul className="fact-list">
-          <li><strong>Simple Queue</strong> — basic FIFO</li>
-          <li><strong>Circular Queue</strong> — rear wraps to front, avoids wasted space</li>
-          <li><strong>Deque (Double Ended)</strong> — insert/remove from both ends</li>
-          <li><strong>Priority Queue</strong> — highest priority dequeued first</li>
+          <li><strong>Simple Queue:</strong> straight line — rear in, front out</li>
+          <li><strong>Circular Queue:</strong> rear wraps back to front — reuses empty slots, no waste</li>
+          <li><strong>Deque:</strong> double-ended — add or remove from either end</li>
+          <li><strong>Priority Queue:</strong> highest-priority item dequeues first, ignoring arrival order</li>
         </ul>
 
         <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>BFS — Queue in Action</h3>
-        <ul className="fact-list">
-          <li><strong>Breadth-First Search</strong> uses a queue to visit nodes level by level.</li>
-          <li>Enqueue root → dequeue node → enqueue its unvisited neighbors → repeat.</li>
-          <li>Guarantees <strong>shortest path</strong> in unweighted graphs — processes closest nodes first.</li>
-        </ul>
+        <p className="concept-def">
+          <strong>Breadth-First Search</strong> uses a queue to explore a graph level by level. Enqueue the start node, then repeatedly dequeue, visit, and enqueue unvisited neighbours.
+        </p>
+        <p className="concept-def">
+          Because the queue preserves arrival order, BFS always visits the closest nodes first — guaranteeing the <strong>shortest path</strong> in an unweighted graph.
+        </p>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>13</span>
+      <span className="page-number" style={{ left: "1rem" }}>14</span>
     </div>
   );
 });
@@ -110,7 +117,7 @@ export const QueueB = forwardRef((props, ref) => (
         />
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>14</span>
+    <span className="page-number" style={{ right: "1rem" }}>15</span>
   </div>
 ));
 QueueB.displayName = "QueueB";

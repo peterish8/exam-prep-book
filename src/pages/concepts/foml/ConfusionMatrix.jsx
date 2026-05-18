@@ -17,6 +17,9 @@ export const ConfusionMatrixA = forwardRef((props, ref) => {
       <div className="page-inner">
         <div className="concept-tag" style={{ background: "#16a34a" }}>FOML</div>
         <h2 className="concept-title">Confusion Matrix & Metrics</h2>
+        <p className="concept-def">
+          Accuracy sounds like a great metric — until you have an imbalanced dataset where 99% of samples are negative. A model that always predicts negative achieves 99% accuracy while completely failing its job. The <strong>confusion matrix</strong> breaks down your model's predictions into four categories, giving you a much richer picture. Click any cell below to edit the numbers and watch all four metrics recalculate live.
+        </p>
 
         <div className="cm-grid">
           <div />
@@ -58,15 +61,14 @@ export const ConfusionMatrixA = forwardRef((props, ref) => {
         </div>
 
         <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Precision vs Recall Tradeoff</h3>
-        <ul className="fact-list">
-          <li><strong>Precision</strong> = of everything predicted positive, how many were actually positive? Penalises false alarms (FP).</li>
-          <li><strong>Recall</strong> = of everything actually positive, how many did the model catch? Penalises missed cases (FN).</li>
-          <li><strong>Raising threshold</strong> → higher precision, lower recall (fewer positives predicted, but more confident).</li>
-          <li><strong>Lowering threshold</strong> → higher recall, lower precision (catches more positives, but more false alarms).</li>
-          <li><strong>F1 score</strong> balances both — use it when you need a single metric for imbalanced classes.</li>
-        </ul>
+        <p className="concept-def">
+          <strong>Precision</strong> asks: "of all the times my model cried wolf (predicted positive), how often was it right?" It penalises false alarms. <strong>Recall</strong> asks: "of all the real wolves out there (actual positives), how many did my model catch?" It penalises missed cases. These two metrics pull against each other — if you raise the classification threshold, your model becomes more conservative, predicting positive only when very confident, so precision goes up but recall falls. Lower the threshold and the model catches more real positives (high recall) but also raises more false alarms (low precision).
+        </p>
+        <p className="concept-def">
+          The right trade-off depends on the cost of each error type. In cancer screening, a missed cancer (false negative) is catastrophic — maximise recall. In spam filtering, accidentally blocking important emails (false positive) is very bad — maximise precision. When you need a single balanced number, use the <strong>F1 score</strong>, the harmonic mean of precision and recall.
+        </p>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>49</span>
+      <span className="page-number" style={{ left: "1rem" }}>50</span>
     </div>
   );
 });
@@ -100,7 +102,7 @@ export const ConfusionMatrixB = forwardRef((props, ref) => (
         <ExamCard q="When is accuracy misleading?" a="Imbalanced datasets — 99% negative: model predicting always negative gets 99% accuracy but 0% recall." />
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>50</span>
+    <span className="page-number" style={{ right: "1rem" }}>51</span>
   </div>
 ));
 ConfusionMatrixB.displayName = "ConfusionMatrixB";

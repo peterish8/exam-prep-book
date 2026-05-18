@@ -1,34 +1,50 @@
 import { forwardRef, useState, createContext, useContext } from "react";
 import ExamCard from "../../../components/ExamCard";
+import SyntaxBlock from "../../../components/SyntaxBlock";
 
 const ThemeCtx = createContext("light");
 
 function ThemedBox() {
   const theme = useContext(ThemeCtx);
   return (
-    <div style={{
-      background: theme === "dark" ? "#1e1e2e" : "#f0f9ff",
-      color: theme === "dark" ? "#e2e8f0" : "#1e3a5f",
-      border: `1px solid ${theme === "dark" ? "#334155" : "#93c5fd"}`,
-      borderRadius: "6px", padding: "0.5rem", marginTop: "0.5rem", fontSize: "0.8rem"
-    }}>
-      Theme from Context: <strong>{theme}</strong> 🎨
+    <div
+      style={{
+        background: theme === "dark" ? "#1e1e2e" : "#f0f9ff",
+        color: theme === "dark" ? "#e2e8f0" : "#1e3a5f",
+        border: `1px solid ${theme === "dark" ? "#334155" : "#93c5fd"}`,
+        borderRadius: "6px",
+        padding: "0.5rem",
+        marginTop: "0.5rem",
+        fontSize: "0.8rem",
+      }}
+    >
+      Theme from Context: <strong>{theme}</strong>
     </div>
   );
 }
 
 export const ContextRouterA = forwardRef((props, ref) => {
   const [theme, setTheme] = useState("light");
+
   return (
     <div ref={ref} className="book-page concept-page">
       <div className="page-inner">
         <div className="concept-tag" style={{ background: "#2563eb" }}>AFD</div>
         <h2 className="concept-title">Context API</h2>
         <p className="concept-def">
-          Context solves <strong>props drilling</strong>. A Provider wraps the tree; any descendant can consume via <code>useContext</code>.
+          <strong>Context API</strong> is React&apos;s shortcut for shared data. It helps when passing the same value through many layers becomes annoying.
+        </p>
+        <ul className="fact-list">
+          <li><strong>Props drilling:</strong> forwarding data through components that do not need it</li>
+          <li><strong>Provider:</strong> places the shared value at the top of a subtree</li>
+          <li><strong>useContext:</strong> reads that value in any descendant</li>
+          <li><strong>Best for:</strong> theme, auth user, language, cart</li>
+        </ul>
+        <p className="concept-def">
+          The pattern is simple: create context, wrap with a provider, then read it where needed.
         </p>
 
-        <pre className="code-snippet" style={{ fontSize: "0.68rem" }}>{`// 1. Create context
+        <SyntaxBlock language="jsx" title="context-demo.jsx" code={`// 1. Create context
 const ThemeCtx = createContext("light");
 
 // 2. Wrap with Provider
@@ -37,30 +53,40 @@ const ThemeCtx = createContext("light");
 </ThemeCtx.Provider>
 
 // 3. Consume anywhere
-const theme = useContext(ThemeCtx);`}</pre>
+const theme = useContext(ThemeCtx);`} />
 
         <div className="live-demo" style={{ marginTop: "0.5rem" }}>
           <div className="live-demo__label">Live Context Demo</div>
           <div style={{ display: "flex", gap: "0.5rem" }}>
-            <button className={`bigo-btn ${theme === "light" ? "bigo-btn--on" : ""}`}
-              style={{ "--c": "#2563eb" }} onClick={() => setTheme("light")}>Light</button>
-            <button className={`bigo-btn ${theme === "dark" ? "bigo-btn--on" : ""}`}
-              style={{ "--c": "#2563eb" }} onClick={() => setTheme("dark")}>Dark</button>
+            <button
+              className={`bigo-btn ${theme === "light" ? "bigo-btn--on" : ""}`}
+              style={{ "--c": "#2563eb" }}
+              onClick={() => setTheme("light")}
+            >
+              Light
+            </button>
+            <button
+              className={`bigo-btn ${theme === "dark" ? "bigo-btn--on" : ""}`}
+              style={{ "--c": "#2563eb" }}
+              onClick={() => setTheme("dark")}
+            >
+              Dark
+            </button>
           </div>
           <ThemeCtx.Provider value={theme}>
             <ThemedBox />
           </ThemeCtx.Provider>
         </div>
 
-        <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Context vs Props — When to Use Which</h3>
-        <ul className="fact-list">
-          <li><strong>Use props</strong> when data only needs to travel 1–2 levels down. Simple, explicit, easy to trace.</li>
-          <li><strong>Use Context</strong> when the same data is needed by many components at different nesting levels (theme, auth user, language, cart).</li>
-          <li><strong>Context causes re-renders</strong> in every consumer when the value changes — avoid putting frequently-changing data (e.g. mouse position) in Context.</li>
-          <li><strong>Rule of thumb:</strong> if you're passing props through components that don't use them, switch to Context.</li>
-        </ul>
+        <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Context vs Props</h3>
+        <p className="concept-def">
+          <strong>Props</strong> are still best when data only moves one or two levels. They stay explicit and easy to trace.
+        </p>
+        <p className="concept-def">
+          Use <strong>Context</strong> when one value is needed in many distant places. Be careful: every consumer re-renders when that value changes.
+        </p>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>29</span>
+      <span className="page-number" style={{ left: "1rem" }}>30</span>
     </div>
   );
 });
@@ -69,16 +95,16 @@ ContextRouterA.displayName = "ContextRouterA";
 export const ContextRouterB = forwardRef((props, ref) => {
   const [route, setRoute] = useState("home");
   const routes = {
-    home: "🏠 Home Page Content",
-    about: "👤 About Page Content",
-    contact: "📬 Contact Page Content",
+    home: "Home Page Content",
+    about: "About Page Content",
+    contact: "Contact Page Content",
   };
 
   return (
     <div ref={ref} className="book-page concept-page concept-page--right">
       <div className="page-inner">
         <h3 className="concept-subtitle">React Router v6</h3>
-        <pre className="code-snippet" style={{ fontSize: "0.68rem" }}>{`// main.jsx
+        <SyntaxBlock language="jsx" title="main.jsx" code={`// main.jsx
 <BrowserRouter>
   <Routes>
     <Route path="/" element={<Home />} />
@@ -89,26 +115,32 @@ export const ContextRouterB = forwardRef((props, ref) => {
 </BrowserRouter>
 
 // Navigate: <Link to="/about">About</Link>
-// useNavigate() hook for programmatic nav
-// useParams() to get :id from URL`}</pre>
+// useNavigate() for programmatic nav
+// useParams() to get :id from URL`} />
 
         <div className="live-demo" style={{ marginTop: "0.5rem" }}>
           <div className="live-demo__label">Simulated Router</div>
           <div style={{ display: "flex", gap: "0.5rem" }}>
-            {Object.keys(routes).map(r => (
-              <button key={r} className={`bigo-btn ${route === r ? "bigo-btn--on" : ""}`}
-                style={{ "--c": "#2563eb" }} onClick={() => setRoute(r)}>{r}</button>
+            {Object.keys(routes).map((r) => (
+              <button
+                key={r}
+                className={`bigo-btn ${route === r ? "bigo-btn--on" : ""}`}
+                style={{ "--c": "#2563eb" }}
+                onClick={() => setRoute(r)}
+              >
+                {r}
+              </button>
             ))}
           </div>
           <div className="jsx-output" style={{ marginTop: "0.5rem" }}>{routes[route]}</div>
         </div>
 
         <div className="exam-cards" style={{ marginTop: "0.5rem" }}>
-          <ExamCard q="useContext vs Redux?" a="useContext: simple, built-in, good for theming/auth. Redux: powerful, for complex global state with reducers/actions." />
-          <ExamCard q="<Link> vs <a href>?" a="Link prevents full page reload, handles SPA routing. <a> causes full reload." />
+          <ExamCard q="useContext vs Redux?" a="useContext is simple and built in. Redux is stronger for complex global state flows." />
+          <ExamCard q="<Link> vs <a href>?" a="Link keeps SPA navigation inside React. a href causes a full page reload." />
         </div>
       </div>
-      <span className="page-number" style={{ right: "1rem" }}>30</span>
+      <span className="page-number" style={{ right: "1rem" }}>31</span>
     </div>
   );
 });

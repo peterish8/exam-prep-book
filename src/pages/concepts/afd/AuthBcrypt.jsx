@@ -1,5 +1,6 @@
 import { forwardRef, useState } from "react";
 import ExamCard from "../../../components/ExamCard";
+import SyntaxBlock from "../../../components/SyntaxBlock";
 
 export const AuthBcryptA = forwardRef((props, ref) => {
   const [password, setPassword] = useState("mySecret");
@@ -17,11 +18,11 @@ export const AuthBcryptA = forwardRef((props, ref) => {
         <div className="concept-tag" style={{ background: "#2563eb" }}>AFD</div>
         <h2 className="concept-title">Auth & Bcrypt</h2>
         <p className="concept-def">
-          Bcrypt <strong>hashes</strong> passwords with a salt. You never store plain passwords — only the hash.
+          Imagine a database breach — an attacker downloads every row. If passwords are stored as plain text, every account is instantly compromised. The solution is to never store passwords at all — only store a <strong>hash</strong>, a one-way mathematical transformation. Bcrypt takes a password, mixes in a random <strong>salt</strong> (so identical passwords produce different hashes), and runs a deliberately slow hashing algorithm. Even if an attacker gets the hash, reversing it is computationally infeasible. Try hashing a password below, then check that comparing the original against the hash returns true — but changing even one character returns false.
         </p>
-        <pre className="code-snippet" style={{ fontSize: "0.68rem" }}>{`const bcrypt = require('bcrypt');
+        <SyntaxBlock language="javascript" title="bcrypt-auth.js" code={`const bcrypt = require('bcrypt');
 const hash = await bcrypt.hash(password, 10); // 10 = salt rounds
-const ok = await bcrypt.compare(password, hash); // true/false`}</pre>
+const ok = await bcrypt.compare(password, hash); // true/false`} />
 
         <div className="live-demo" style={{ marginTop: "0.5rem" }}>
           <div className="live-demo__label">Simulated Bcrypt</div>
@@ -48,14 +49,11 @@ const ok = await bcrypt.compare(password, hash); // true/false`}</pre>
         </div>
 
         <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Why Never Store Plain Passwords</h3>
-        <ul className="fact-list">
-          <li><strong>Database breach:</strong> if an attacker dumps your DB and passwords are plain text, every account is instantly compromised.</li>
-          <li><strong>Hashing is one-way:</strong> bcrypt turns "mySecret" into a long hash — you can never reverse it back to the original.</li>
-          <li><strong>Salt</strong> is a random value added before hashing — ensures two identical passwords produce different hashes, defeating rainbow table attacks.</li>
-          <li><strong>Salt rounds (cost factor):</strong> each extra round doubles hashing time. Round 10 ≈ 100ms. Higher = slower brute force for attackers.</li>
-        </ul>
+        <p className="concept-def">
+          Hashing is a <em>one-way</em> function — bcrypt turns "mySecret" into a long scrambled string, and there is no mathematical reverse. To check a login, you hash the attempt and compare the two hashes; you never need the original. The <strong>salt</strong> is a random value mixed in before hashing, unique to each password — so even if two users pick "password123", their hashes look completely different, defeating pre-computed rainbow table attacks. The <strong>salt rounds</strong> (cost factor) control how many times bcrypt iterates: each extra round doubles the time. Round 10 takes about 100ms — annoying for an attacker doing millions of guesses, unnoticeable for a single login.
+        </p>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>37</span>
+      <span className="page-number" style={{ left: "1rem" }}>38</span>
     </div>
   );
 });
@@ -102,7 +100,7 @@ export const AuthBcryptB = forwardRef((props, ref) => (
         <ExamCard q="bcrypt salt rounds?" a="Higher rounds = slower hash = harder to brute force. 10-12 is standard. Each extra round doubles time." />
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>38</span>
+    <span className="page-number" style={{ right: "1rem" }}>39</span>
   </div>
 ));
 AuthBcryptB.displayName = "AuthBcryptB";

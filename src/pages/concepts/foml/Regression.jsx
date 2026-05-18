@@ -46,7 +46,7 @@ export const RegressionA = forwardRef((props, ref) => {
         <div className="concept-tag" style={{ background: "#16a34a" }}>FOML</div>
         <h2 className="concept-title">Linear Regression</h2>
         <p className="concept-def">
-          Fit a line <strong>y = mx + b</strong> that minimises Mean Squared Error (MSE).
+          Imagine you've measured study hours and exam scores for a class of students and plotted each as a dot. You want to draw the single straight line that best summarises the trend — close to as many dots as possible. Linear regression does exactly this: it finds the line <strong>y = mx + b</strong> that minimises the <em>average squared distance</em> between each dot and the line (Mean Squared Error). Click the chart to add your own points and watch the line and MSE update instantly.
         </p>
 
         <svg width={W} height={H} style={{ cursor: "crosshair" }} onClick={handleClick}>
@@ -75,14 +75,11 @@ export const RegressionA = forwardRef((props, ref) => {
         </div>
 
         <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Linear vs Logistic Regression</h3>
-        <ul className="fact-list">
-          <li><strong>Linear:</strong> predicts a <em>continuous</em> value (price, score). Output is any real number. Uses MSE loss.</li>
-          <li><strong>Logistic:</strong> predicts a <em>probability</em> (0–1) for classification. Output is squashed through sigmoid σ(z). Uses log loss (cross-entropy).</li>
-          <li><strong>Decision boundary:</strong> logistic regression applies a threshold (default 0.5) — above = class 1, below = class 0.</li>
-          <li><strong>Despite the name</strong>, logistic regression is a <em>classification</em> algorithm, not regression.</li>
-        </ul>
+        <p className="concept-def">
+          Despite sharing a name, these two algorithms solve fundamentally different problems. <strong>Linear regression</strong> predicts a continuous number — house price, temperature, exam score — and its output can be any real value. It minimises MSE: the average of the squared gaps between predictions and reality. <strong>Logistic regression</strong> predicts a <em>probability</em> between 0 and 1 — "what's the chance this email is spam?" It does this by squashing a linear combination of features through the sigmoid function σ(z) = 1/(1+e⁻ᶻ), which squeezes any real number into the 0–1 range. A threshold (usually 0.5) then converts that probability into a class label. Confusingly, despite its name, logistic regression is a <strong>classification</strong> algorithm.
+        </p>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>47</span>
+      <span className="page-number" style={{ left: "1rem" }}>48</span>
     </div>
   );
 });
@@ -131,7 +128,7 @@ export const RegressionB = forwardRef((props, ref) => {
           <ExamCard q="Multiple linear regression?" a="y = b₀ + b₁x₁ + b₂x₂ + … + bₙxₙ. More features, same principle — minimise MSE." />
         </div>
       </div>
-      <span className="page-number" style={{ right: "1rem" }}>48</span>
+      <span className="page-number" style={{ right: "1rem" }}>49</span>
     </div>
   );
 });

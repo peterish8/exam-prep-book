@@ -25,7 +25,7 @@ export const BiasVarianceA = forwardRef((props, ref) => {
         <div className="concept-tag" style={{ background: "#16a34a" }}>FOML</div>
         <h2 className="concept-title">Bias-Variance Tradeoff</h2>
         <p className="concept-def">
-          <strong>Bias</strong>: error from wrong assumptions (underfitting). <strong>Variance</strong>: error from sensitivity to training noise (overfitting).
+          Imagine teaching a student with two bad extremes. One student is so stubborn they refuse to look at the data closely — they always predict the class average no matter what. That's <strong>high bias</strong>: the model makes oversimplified assumptions and underfits. The other student memorises every single example, including all the quirks and noise in the training set — but the moment you show them something new, they fail. That's <strong>high variance</strong>: the model is too sensitive to training data and overfits.
         </p>
         <p className="concept-formula">Total Error = Bias² + Variance + Irreducible Noise</p>
 
@@ -58,14 +58,14 @@ export const BiasVarianceA = forwardRef((props, ref) => {
         </div>
 
         <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Overfitting vs Underfitting</h3>
-        <ul className="fact-list">
-          <li><strong>Underfitting (high bias):</strong> model is too simple — misses patterns in training data. Both train and test error are high.</li>
-          <li><strong>Overfitting (high variance):</strong> model memorises training data including noise — train error very low, test error high.</li>
-          <li><strong>Fix underfitting:</strong> add more features, use a more complex model, reduce regularisation.</li>
-          <li><strong>Fix overfitting:</strong> get more data, add L1/L2 regularisation, use dropout, reduce model complexity.</li>
-        </ul>
+        <p className="concept-def">
+          Drag the complexity slider above and watch the three curves. As model complexity increases, bias falls (the model can capture more patterns) but variance rises (it becomes sensitive to noise). Total error — the sum of both plus irreducible noise — forms a U-shape, with a sweet spot in the middle. <strong>Underfitting</strong> (left side) means both training and test error are high — the model is too simple to learn anything useful. <strong>Overfitting</strong> (right side) means training error is very low but test error is high — the model memorised the training set instead of generalising.
+        </p>
+        <p className="concept-def">
+          To fix underfitting: add more features, use a more complex model architecture, or reduce regularisation strength. To fix overfitting: collect more training data, add L1 or L2 regularisation (which penalise large weights), use dropout in neural networks, or simplify the model. Cross-validation helps you detect which problem you have before deploying.
+        </p>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>51</span>
+      <span className="page-number" style={{ left: "1rem" }}>52</span>
     </div>
   );
 });
@@ -99,7 +99,7 @@ export const BiasVarianceB = forwardRef((props, ref) => (
         <ExamCard q="Training accuracy 99%, test accuracy 60% — problem?" a="Overfitting. Model memorised training data, can't generalise. Add regularisation / more data." />
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>52</span>
+    <span className="page-number" style={{ right: "1rem" }}>53</span>
   </div>
 ));
 BiasVarianceB.displayName = "BiasVarianceB";

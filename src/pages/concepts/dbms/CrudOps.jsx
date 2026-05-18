@@ -1,5 +1,6 @@
 import { forwardRef, useState } from "react";
 import ExamCard from "../../../components/ExamCard";
+import SyntaxBlock from "../../../components/SyntaxBlock";
 
 const SAMPLE_DOCS = [
   { _id: 1, name: "Alice", age: 25, city: "Chennai", score: 88 },
@@ -27,6 +28,9 @@ export const CrudOpsA = forwardRef((props, ref) => {
       <div className="page-inner">
         <div className="concept-tag" style={{ background: "#7c3aed" }}>DBMS</div>
         <h2 className="concept-title">CRUD & Query Operators</h2>
+        <p className="concept-def">
+          Every database interaction boils down to four operations: <strong>Create</strong> (insert new documents), <strong>Read</strong> (find documents matching a condition), <strong>Update</strong> (modify existing documents), and <strong>Delete</strong> (remove documents). In MongoDB, these map to <code>insertOne</code>, <code>find</code>, <code>updateOne</code>, and <code>deleteOne</code>. The real power comes from MongoDB's query operators — special keywords prefixed with <code>$</code> that let you express rich conditions. Click through the queries below and watch the results filter live.
+        </p>
 
         <div className="bigo-toggles" style={{ flexWrap: "wrap" }}>
           {QUERIES.map((q, i) => (
@@ -53,14 +57,11 @@ export const CrudOpsA = forwardRef((props, ref) => {
         </div>
 
         <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Query Operator Cheat Sheet</h3>
-        <ul className="fact-list">
-          <li><strong>$gt / $gte / $lt / $lte:</strong> greater/less than (or equal). e.g. <code>{"{ age: { $gt: 18 } }"}</code></li>
-          <li><strong>$in / $nin:</strong> field value is (or is not) in a given array. e.g. <code>{"{ score: { $in: [72, 88] } }"}</code></li>
-          <li><strong>$exists:</strong> checks if a field is present. <code>{"{ phone: { $exists: true } }"}</code></li>
-          <li><strong>$and / $or:</strong> combine conditions. <code>{"{ $or: [ { age: { $lt: 20 } }, { city: 'Chennai' } ] }"}</code></li>
-        </ul>
+        <p className="concept-def">
+          MongoDB's query operators all start with <code>$</code> and nest inside the query object. The comparison operators — <code>$gt</code>, <code>$gte</code>, <code>$lt</code>, <code>$lte</code> — let you filter by ranges: <code>{"{ age: { $gt: 18 } }"}</code> finds everyone older than 18. <code>$in</code> checks if a field's value appears in a list: <code>{"{ score: { $in: [72, 88] } }"}</code>. <code>$exists</code> checks whether a field is present at all, which is useful when not every document has the same shape. For combining conditions, <code>$and</code> requires all conditions to match while <code>$or</code> requires at least one — letting you build expressive queries without writing raw SQL.
+        </p>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>55</span>
+      <span className="page-number" style={{ left: "1rem" }}>56</span>
     </div>
   );
 });
@@ -70,7 +71,7 @@ export const CrudOpsB = forwardRef((props, ref) => (
   <div ref={ref} className="book-page concept-page concept-page--right">
     <div className="page-inner">
       <h3 className="concept-subtitle">CRUD Operations</h3>
-      <pre className="code-snippet" style={{ fontSize: "0.65rem" }}>{`// CREATE
+      <SyntaxBlock language="javascript" title="crud-ops.mongodb.js" code={`// CREATE
 db.users.insertOne({ name: "Alex", age: 22 })
 db.users.insertMany([{...}, {...}])
 
@@ -87,7 +88,7 @@ db.users.updateMany({}, { $inc: { score: 5 } })
 
 // DELETE
 db.users.deleteOne({ name: "Alex" })
-db.users.deleteMany({ age: {$lt: 18} })`}</pre>
+db.users.deleteMany({ age: {$lt: 18} })`} />
 
       <h3 className="concept-subtitle" style={{ marginTop: "0.5rem" }}>Query Operators</h3>
       <table className="cheat-table" style={{ fontSize: "0.72rem" }}>
@@ -101,7 +102,7 @@ db.users.deleteMany({ age: {$lt: 18} })`}</pre>
         </tbody>
       </table>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>56</span>
+    <span className="page-number" style={{ right: "1rem" }}>57</span>
   </div>
 ));
 CrudOpsB.displayName = "CrudOpsB";

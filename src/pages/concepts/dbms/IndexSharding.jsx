@@ -62,7 +62,7 @@ export const IndexShardingA = forwardRef((props, ref) => {
           <li><strong>With index:</strong> MongoDB traverses the B-tree to the matching key, then jumps directly to the document (IXSCAN) — O(log n).</li>
         </ul>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>57</span>
+      <span className="page-number" style={{ left: "1rem" }}>58</span>
     </div>
   );
 });
@@ -106,7 +106,7 @@ export const IndexShardingB = forwardRef((props, ref) => (
         <ExamCard q="explain() in MongoDB?" a="db.col.find({...}).explain('executionStats') — shows if query used an index (IXSCAN) or full scan (COLLSCAN)." />
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>58</span>
+    <span className="page-number" style={{ right: "1rem" }}>59</span>
   </div>
 ));
 IndexShardingB.displayName = "IndexShardingB";

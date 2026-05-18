@@ -10,7 +10,7 @@ const subjectColors = {
 
 const Toc = forwardRef(({ onJump }, ref) => {
   const subjects = ["DSA", "AFD", "FOML", "DBMS"];
-  const plannerEntries = toc.filter(t => t.subject === null && t.page > 0 && t.page < 4);
+  const plannerEntries = toc.filter(t => t.subject === null && t.page >= 3 && t.page <= 4);
   const entryMap = (subj) => toc.filter(t => t.subject === subj);
 
   return (
@@ -44,7 +44,7 @@ const Toc = forwardRef(({ onJump }, ref) => {
           </div>
         ))}
       </div>
-      <span className="page-number" style={{ right: "1rem" }}>2</span>
+      <span className="page-number" style={{ right: "1rem" }}>3</span>
     </div>
   );
 });

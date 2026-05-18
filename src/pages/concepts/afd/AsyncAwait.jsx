@@ -1,12 +1,13 @@
 import { forwardRef, useState } from "react";
 import ExamCard from "../../../components/ExamCard";
+import SyntaxBlock from "../../../components/SyntaxBlock";
 
 const STEPS_ASYNC = [
-  { label: "Call fetchUser(1)", state: "calling" },
-  { label: "await fetch('/api/user/1')", state: "waiting", note: "JS suspends fetchUser, event loop free" },
-  { label: "HTTP response arrives", state: "resuming" },
-  { label: "Parse JSON → user object", state: "parsing" },
-  { label: "Return user", state: "done" },
+  { label: "Call fetchUser(1)", note: "" },
+  { label: "await fetch('/api/user/1')", note: "Function pauses, but JS can do other work" },
+  { label: "HTTP response arrives", note: "" },
+  { label: "Parse JSON -> user object", note: "" },
+  { label: "Return user", note: "" },
 ];
 
 export const AsyncAwaitA = forwardRef((props, ref) => {
@@ -18,10 +19,16 @@ export const AsyncAwaitA = forwardRef((props, ref) => {
         <div className="concept-tag" style={{ background: "#2563eb" }}>AFD</div>
         <h2 className="concept-title">Async / Await & Throttling</h2>
         <p className="concept-def">
-          <code>async</code> functions always return a Promise. <code>await</code> pauses execution inside the function without blocking the main thread.
+          <strong>async/await</strong> makes asynchronous code read like normal step-by-step code. The function pauses, but JavaScript itself does not freeze.
         </p>
+        <ul className="fact-list">
+          <li><strong>async:</strong> makes a function return a Promise</li>
+          <li><strong>await:</strong> waits for a Promise result inside async code</li>
+          <li><strong>Non-blocking:</strong> the event loop can still do other work</li>
+          <li><strong>try/catch:</strong> clean way to handle async errors</li>
+        </ul>
 
-        <pre className="code-snippet" style={{ fontSize: "0.68rem" }}>{`async function fetchUser(id) {
+        <SyntaxBlock language="javascript" title="fetch-user.js" code={`async function fetchUser(id) {
   try {
     const res = await fetch(\`/api/user/\${id}\`);
     if (!res.ok) throw new Error('Not found');
@@ -30,7 +37,7 @@ export const AsyncAwaitA = forwardRef((props, ref) => {
   } catch (err) {
     console.error(err);
   }
-}`}</pre>
+}`} />
 
         <div className="async-timeline">
           {STEPS_ASYNC.map((s, i) => (
@@ -43,44 +50,34 @@ export const AsyncAwaitA = forwardRef((props, ref) => {
         </div>
 
         <div className="stepper-btns">
-          <button disabled={step === 0} onClick={() => setStep(s => s - 1)}>←</button>
+          <button disabled={step === 0} onClick={() => setStep((v) => v - 1)}>{"<-"}</button>
           <span className="step-label">{step + 1}/{STEPS_ASYNC.length}</span>
-          <button disabled={step === STEPS_ASYNC.length - 1} onClick={() => setStep(s => s + 1)}>→</button>
-          <button onClick={() => setStep(0)} className="reset-btn">↺</button>
+          <button disabled={step === STEPS_ASYNC.length - 1} onClick={() => setStep((v) => v + 1)}>{"->"}</button>
+          <button onClick={() => setStep(0)} className="reset-btn">Reset</button>
         </div>
 
         <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>async/await vs Promise Chaining</h3>
-        <ul className="fact-list">
-          <li><strong>Same under the hood:</strong> <code>async/await</code> is syntactic sugar over Promises — both produce a Promise.</li>
-          <li><strong>async/await reads linearly</strong> like synchronous code, making logic easier to follow and debug.</li>
-          <li><strong>Promise chaining</strong> uses <code>.then().catch().finally()</code> — good for simple pipelines but nests deeply with complex logic.</li>
-          <li><strong>Error handling:</strong> <code>async/await</code> uses <code>try/catch</code>; Promise chains use <code>.catch()</code>. Both catch rejections.</li>
-        </ul>
+        <p className="concept-def">
+          Under the hood, <strong>async/await</strong> still uses Promises. The big win is readability when logic gets longer.
+        </p>
+        <p className="concept-def">
+          Promise chains are fine for short flows. For bigger flows, async/await usually feels cleaner.
+        </p>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>33</span>
+      <span className="page-number" style={{ left: "1rem" }}>34</span>
     </div>
   );
 });
 AsyncAwaitA.displayName = "AsyncAwaitA";
 
-export const AsyncAwaitB = forwardRef((props, ref) => {
-  const [calls, setCalls] = useState([]);
-  const [throttling, setThrottling] = useState(false);
-
-  const addCall = () => {
-    const now = Date.now();
-    setCalls(c => [...c.slice(-6), { t: now, blocked: throttling }]);
-  };
-
-  return (
-    <div ref={ref} className="book-page concept-page concept-page--right">
-      <div className="page-inner">
-        <h3 className="concept-subtitle">API Throttling & Rate Limiting</h3>
-        <p className="concept-def" style={{ fontSize: "0.8rem" }}>
-          <strong>Throttle</strong>: max once per time window. <strong>Debounce</strong>: only fires after user stops for X ms.
-        </p>
-        <pre className="code-snippet" style={{ fontSize: "0.67rem" }}>{`// Throttle: max 1 call per 1000ms
-function throttle(fn, limit) {
+export const AsyncAwaitB = forwardRef((props, ref) => (
+  <div ref={ref} className="book-page concept-page concept-page--right">
+    <div className="page-inner">
+      <h3 className="concept-subtitle">API Throttling & Rate Limiting</h3>
+      <p className="concept-def" style={{ fontSize: "0.8rem" }}>
+        <strong>Throttle</strong> means "run at most once per time window." <strong>Debounce</strong> means "wait until typing or activity stops."
+      </p>
+      <SyntaxBlock language="javascript" title="timing-utils.js" code={`function throttle(fn, limit) {
   let lastCall = 0;
   return (...args) => {
     const now = Date.now();
@@ -91,23 +88,21 @@ function throttle(fn, limit) {
   };
 }
 
-// Debounce: fires after 500ms of silence
 function debounce(fn, delay) {
   let timer;
   return (...args) => {
     clearTimeout(timer);
     timer = setTimeout(() => fn(...args), delay);
   };
-}`}</pre>
+}`} />
 
-        <div className="exam-cards" style={{ marginTop: "0.5rem" }}>
-          <ExamCard q="Promise.all vs Promise.race?" a="all: waits for ALL to resolve (fails fast). race: resolves/rejects when FIRST settles." />
-          <ExamCard q="async/await vs .then chains?" a="Same under the hood. async/await is syntactic sugar — reads more like synchronous code." />
-          <ExamCard q="Throttle vs Debounce use cases?" a="Throttle: scroll events, resize. Debounce: search input, form validation on keyup." />
-        </div>
+      <div className="exam-cards" style={{ marginTop: "0.5rem" }}>
+        <ExamCard q="Promise.all vs Promise.race?" a="all waits for every Promise. race settles as soon as the first one settles." />
+        <ExamCard q="async/await vs .then chains?" a="Same engine underneath. async/await usually reads more clearly." />
+        <ExamCard q="Throttle vs Debounce use cases?" a="Throttle for scroll or resize. Debounce for search input or validation after typing." />
       </div>
-      <span className="page-number" style={{ right: "1rem" }}>34</span>
     </div>
-  );
-});
+    <span className="page-number" style={{ right: "1rem" }}>35</span>
+  </div>
+));
 AsyncAwaitB.displayName = "AsyncAwaitB";

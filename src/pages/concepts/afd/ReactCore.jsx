@@ -1,5 +1,6 @@
 import { forwardRef, useState } from "react";
 import ExamCard from "../../../components/ExamCard";
+import SyntaxBlock from "../../../components/SyntaxBlock";
 
 const JSX_DEMO = `// JSX  (looks like HTML but it's JS!)
 function Greeting({ name }) {
@@ -17,7 +18,7 @@ export const ReactCoreA = forwardRef((props, ref) => {
         <div className="concept-tag" style={{ background: "#2563eb" }}>AFD</div>
         <h2 className="concept-title">React Core & JSX</h2>
         <p className="concept-def">
-          React is a UI library. You build a <strong>component tree</strong>. React updates only what changed via the <em>Virtual DOM</em>.
+          React lets you <em>describe</em> what the UI should look like for a given state — rather than manually updating the DOM. You build reusable <strong>components</strong>, compose them into a tree, and React handles the updates.
         </p>
 
         <div className="live-demo">
@@ -31,25 +32,25 @@ export const ReactCoreA = forwardRef((props, ref) => {
           </div>
         </div>
 
-        <pre className="code-snippet">{JSX_DEMO}</pre>
+        <SyntaxBlock language="jsx" title="Greeting.jsx" code={JSX_DEMO} />
 
-        <h3 className="concept-subtitle" style={{ marginTop: "0.5rem" }}>React Rules</h3>
+        <h3 className="concept-subtitle" style={{ marginTop: "0.5rem" }}>JSX Rules</h3>
         <ul className="fact-list">
-          <li>Component name <strong>must start with Capital letter</strong></li>
-          <li>JSX must return <strong>one root element</strong> (use &lt;&gt;…&lt;/&gt; fragments)</li>
-          <li>Use <code>className</code> not <code>class</code>; <code>htmlFor</code> not <code>for</code></li>
-          <li>JS expressions in JSX wrapped in <code>{'{ }'}</code></li>
+          <li><strong>Capital letter:</strong> component names must start with uppercase — e.g. <code>MyButton</code></li>
+          <li><strong>Single root:</strong> every JSX block must return one root element (use <code>&lt;&gt;…&lt;/&gt;</code> Fragment)</li>
+          <li><strong>className / htmlFor:</strong> use instead of <code>class</code> / <code>for</code> (reserved JS words)</li>
+          <li><strong>Expressions:</strong> embed any JS value with curly braces — <code>{"{ value }"}</code></li>
         </ul>
 
         <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Virtual DOM & Reconciliation</h3>
-        <ul className="fact-list">
-          <li><strong>Virtual DOM:</strong> a lightweight JS object copy of the real DOM kept in memory.</li>
-          <li><strong>On state change:</strong> React creates a new Virtual DOM tree and <em>diffs</em> it against the old one.</li>
-          <li><strong>Reconciliation:</strong> React calculates the minimum set of real DOM changes needed and applies only those.</li>
-          <li><strong>Why faster:</strong> real DOM operations are slow; batching minimal changes avoids unnecessary repaints.</li>
-        </ul>
+        <p className="concept-def">
+          React keeps a lightweight <strong>Virtual DOM</strong> in memory — a JS object tree mirroring the real DOM. On state change, it builds a new tree and <em>diffs</em> it against the previous one.
+        </p>
+        <p className="concept-def">
+          This process — called <strong>reconciliation</strong> — finds only changed nodes and applies minimal patches to the real DOM, avoiding expensive full re-renders.
+        </p>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>21</span>
+      <span className="page-number" style={{ left: "1rem" }}>22</span>
     </div>
   );
 });
@@ -89,7 +90,7 @@ export const ReactCoreB = forwardRef((props, ref) => (
         <ExamCard q="What is React Fragment?" a="<></> or <React.Fragment> — groups elements without adding DOM nodes." />
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>22</span>
+    <span className="page-number" style={{ right: "1rem" }}>23</span>
   </div>
 ));
 ReactCoreB.displayName = "ReactCoreB";

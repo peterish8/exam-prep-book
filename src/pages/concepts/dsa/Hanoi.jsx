@@ -1,5 +1,6 @@
 import { forwardRef, useState } from "react";
 import ExamCard from "../../../components/ExamCard";
+import SyntaxBlock from "../../../components/SyntaxBlock";
 
 function solveHanoi(n, from, to, via, moves = []) {
   if (n === 0) return moves;
@@ -57,8 +58,14 @@ export const HanoiA = forwardRef((props, ref) => {
         <div className="concept-tag" style={{ background: "#e63946" }}>DSA</div>
         <h2 className="concept-title">Tower of Hanoi</h2>
         <p className="concept-def">
-          Move n disks from A→C using B as helper. A larger disk can <strong>never</strong> sit on a smaller one.
+          Move all disks A→C using peg B as helper. One iron rule: never place a <strong>larger disk on a smaller one</strong>.
         </p>
+        <ul className="fact-list">
+          <li><strong>Rule:</strong> only move one disk at a time, never larger onto smaller</li>
+          <li><strong>Recurrence:</strong> T(n) = 2·T(n−1) + 1</li>
+          <li><strong>Solves to:</strong> exactly 2ⁿ − 1 moves — not one move can be skipped</li>
+          <li><strong>Complexity:</strong> O(2ⁿ) — exponential growth</li>
+        </ul>
         <p className="concept-formula">Moves = 2ⁿ − 1&nbsp;&nbsp;|&nbsp;&nbsp;Time: O(2ⁿ)</p>
 
         <HanoiViz rods={getRods(step)} />
@@ -84,15 +91,15 @@ export const HanoiA = forwardRef((props, ref) => {
           ))}
         </div>
 
-        <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Why It's Exponential</h3>
-        <ul className="fact-list">
-          <li><strong>Pattern:</strong> 2 disks → 3 moves, 3 → 7, 4 → 15. Each extra disk <em>doubles</em> the work plus one.</li>
-          <li><strong>Recurrence:</strong> T(n) = 2·T(n−1) + 1 → solves to T(n) = 2ⁿ − 1.</li>
-          <li><strong>Why double?</strong> You must move the top n−1 stack twice (off and back on) to move the bottom disk once.</li>
-          <li><strong>Minimum moves:</strong> you cannot do it in fewer — every move is forced and necessary.</li>
-        </ul>
+        <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Why It&apos;s Exponential</h3>
+        <p className="concept-def">
+          To move the bottom disk A→C, you must first move all n−1 disks to peg B. Then move the big disk. Then move all n−1 disks again B→C.
+        </p>
+        <p className="concept-def">
+          Each added disk doubles the work: T(n) = 2·T(n−1) + 1, which gives <strong>2ⁿ − 1</strong> moves total.
+        </p>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>9</span>
+      <span className="page-number" style={{ left: "1rem" }}>10</span>
     </div>
   );
 });
@@ -102,13 +109,13 @@ export const HanoiB = forwardRef((props, ref) => (
   <div ref={ref} className="book-page concept-page concept-page--right">
     <div className="page-inner">
       <h3 className="concept-subtitle">Recursive Algorithm</h3>
-      <pre className="code-snippet">{`hanoi(n, from, to, via):
+      <SyntaxBlock language="python" title="hanoi.py" code={`hanoi(n, from, to, via):
   if n == 1:
     move disk 1 from→to
     return
   hanoi(n-1, from, via, to)  // move n-1 to helper
   move disk n from→to         // move largest
-  hanoi(n-1, via, to, from)  // move n-1 to dest`}</pre>
+  hanoi(n-1, via, to, from)  // move n-1 to dest`} />
 
       <h3 className="concept-subtitle" style={{ marginTop: "1rem" }}>Key Facts</h3>
       <ul className="fact-list">
@@ -132,7 +139,7 @@ export const HanoiB = forwardRef((props, ref) => (
         />
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>10</span>
+    <span className="page-number" style={{ right: "1rem" }}>11</span>
   </div>
 ));
 HanoiB.displayName = "HanoiB";

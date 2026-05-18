@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import Book from "./components/Book";
 import Cover from "./pages/Cover";
+import InsideCover from "./pages/InsideCover";
 import BackCover from "./pages/BackCover";
 import Toc from "./pages/Toc";
 import { PlannerA, PlannerB } from "./pages/PlannerSpread";
@@ -45,6 +46,7 @@ import "./styles/book.css";
 
 const PAGES = [
   Cover,
+  InsideCover,
   Toc,
   PlannerA,
   PlannerB,
@@ -81,11 +83,11 @@ const PAGES = [
 
 const NAV_ITEMS = [
   { label: "Cover", page: 0 },
-  { label: "Planner", page: 2 },
-  { label: "DSA", page: 4, subj: "DSA" },
-  { label: "AFD", page: 20, subj: "AFD" },
-  { label: "FOML", page: 38, subj: "FOML" },
-  { label: "DBMS", page: 52, subj: "DBMS" },
+  { label: "Planner", page: 3 },
+  { label: "DSA", page: 5, subj: "DSA" },
+  { label: "AFD", page: 21, subj: "AFD" },
+  { label: "FOML", page: 39, subj: "FOML" },
+  { label: "DBMS", page: 53, subj: "DBMS" },
 ];
 
 export default function App() {
@@ -107,7 +109,7 @@ export default function App() {
 
         <Book ref={bookRef} onFlip={setCurrentPage}>
           {PAGES.map((PageComp, i) =>
-            i === 1
+            i === 2
               ? <PageComp key={i} onJump={jumpTo} />
               : <PageComp key={i} />
           )}

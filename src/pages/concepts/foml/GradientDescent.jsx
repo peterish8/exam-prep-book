@@ -55,7 +55,7 @@ export const GradientDescentA = forwardRef((props, ref) => {
         <div className="concept-tag" style={{ background: "#16a34a" }}>FOML</div>
         <h2 className="concept-title">Gradient Descent</h2>
         <p className="concept-def">
-          Move in the direction of <strong>negative gradient</strong> to minimise loss.
+          Imagine you're blindfolded on a hilly landscape and you want to reach the lowest point. You can't see the whole terrain — but you can feel which direction slopes downward beneath your feet. So you take a step in the downhill direction, feel again, take another step. That's gradient descent. The <strong>gradient</strong> tells you the direction of steepest increase in loss, so you move in the <em>opposite</em> direction — subtracting a fraction of the gradient from your current position at each step.
         </p>
         <p className="concept-formula">w = w − α · ∂L/∂w&nbsp;&nbsp;|&nbsp;&nbsp;α = learning rate</p>
 
@@ -89,14 +89,11 @@ export const GradientDescentA = forwardRef((props, ref) => {
         )}
 
         <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Learning Rate: Too High vs Too Low</h3>
-        <ul className="fact-list">
-          <li><strong>Too small α:</strong> tiny steps — takes hundreds of iterations to converge. May get stuck in a flat region or local minimum.</li>
-          <li><strong>Too large α:</strong> overshoots the minimum — bounces back and forth, loss may actually <em>increase</em> and diverge.</li>
-          <li><strong>Sweet spot:</strong> converges smoothly in reasonable steps. Try the demo above with α=0.9 vs α=0.05 to see both extremes.</li>
-          <li><strong>In practice:</strong> use Adam optimizer which adapts the learning rate per parameter automatically.</li>
-        </ul>
+        <p className="concept-def">
+          The learning rate α controls how big each step is. Too small, and you take tiny shuffles — it could take thousands of iterations to reach the minimum, and you might get permanently stuck on a flat plateau. Too large, and you overshoot: you leap past the minimum, land on the other side of the curve, then leap back past it again — the loss bounces around and may never settle or even diverge upward. The sweet spot converges smoothly and efficiently. Try the demo above with α=0.9 (watch it oscillate or diverge) versus α=0.05 (watch it inch along slowly) to feel both failure modes. In real neural network training, the <strong>Adam optimizer</strong> sidesteps this problem by automatically adapting a different learning rate for each parameter.
+        </p>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>45</span>
+      <span className="page-number" style={{ left: "1rem" }}>46</span>
     </div>
   );
 });
@@ -129,7 +126,7 @@ export const GradientDescentB = forwardRef((props, ref) => (
         <ExamCard q="Backpropagation?" a="Algorithm to compute gradients for all weights in a neural network using chain rule." />
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>46</span>
+    <span className="page-number" style={{ right: "1rem" }}>47</span>
   </div>
 ));
 GradientDescentB.displayName = "GradientDescentB";

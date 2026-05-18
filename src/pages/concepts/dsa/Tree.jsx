@@ -45,8 +45,14 @@ export const TreeA = forwardRef((props, ref) => {
         <div className="concept-tag" style={{ background: "#e63946" }}>DSA</div>
         <h2 className="concept-title">Trees & BST</h2>
         <p className="concept-def">
-          A <strong>Binary Search Tree</strong>: left child &lt; node &lt; right child. Search, insert, delete = <strong>O(log n)</strong> avg.
+          A <strong>Binary Search Tree (BST)</strong> has one rule: left child &lt; node &lt; right child. Every comparison eliminates half the remaining tree.
         </p>
+        <ul className="fact-list">
+          <li><strong>Search:</strong> go left if target &lt; node, right if target &gt; node — O(log n) avg</li>
+          <li><strong>Insert:</strong> search for the right spot, place there — O(log n) avg</li>
+          <li><strong>Inorder traversal</strong> of a BST gives values in sorted ascending order</li>
+          <li><strong>Worst case O(n):</strong> sorted insertions create a skewed tree (linked list)</li>
+        </ul>
 
         <svg width="280" height="200" viewBox="0 0 280 200">
           <TreeNode node={BST_DATA} x={140} y={30} highlight={path[step]} />
@@ -71,14 +77,14 @@ export const TreeA = forwardRef((props, ref) => {
         </div>
 
         <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>BST Property & Search Logic</h3>
-        <ul className="fact-list">
-          <li><strong>Ordering rule:</strong> every node in left subtree &lt; root &lt; every node in right subtree — at every level.</li>
-          <li><strong>Search:</strong> compare target to current node → go left if smaller, right if larger, stop if equal.</li>
-          <li><strong>Each comparison eliminates half the tree</strong> → O(log n) average. Works just like binary search on a sorted array.</li>
-          <li><strong>Inorder traversal of BST</strong> always gives a sorted ascending sequence.</li>
-        </ul>
+        <p className="concept-def">
+          The ordering rule cascades at <em>every</em> level — not just the root. Each comparison eliminates an entire subtree, giving O(log n) average performance.
+        </p>
+        <p className="concept-def">
+          Bonus: <strong>inorder traversal</strong> (left → root → right) of any BST always yields values in perfectly sorted ascending order.
+        </p>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>17</span>
+      <span className="page-number" style={{ left: "1rem" }}>18</span>
     </div>
   );
 });
@@ -113,7 +119,7 @@ export const TreeB = forwardRef((props, ref) => (
         <ExamCard q="When does BST degrade to O(n)?" a="When inserted in sorted order — tree becomes a linked list (skewed)." />
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>18</span>
+    <span className="page-number" style={{ right: "1rem" }}>19</span>
   </div>
 ));
 TreeB.displayName = "TreeB";

@@ -37,8 +37,14 @@ export const RecursionA = forwardRef((props, ref) => {
         <div className="concept-tag" style={{ background: "#e63946" }}>DSA</div>
         <h2 className="concept-title">Recursion & the Call Stack</h2>
         <p className="concept-def">
-          A function calls <strong>itself</strong> until it hits a <em>base case</em>. Each call gets its own <em>stack frame</em> pushed onto the call stack.
+          A function is <strong>recursive</strong> when it calls itself on a smaller version of the problem. It keeps delegating until it hits the <strong>base case</strong> — the simplest version it can answer directly.
         </p>
+        <ul className="fact-list">
+          <li><strong>Base case:</strong> the stopping condition — e.g. <code>f(0) = 1</code></li>
+          <li><strong>Recursive case:</strong> calls itself with a smaller input</li>
+          <li><strong>Call stack:</strong> each call is stacked in memory until the base case returns</li>
+          <li><strong>Unwinding:</strong> answers propagate back up the stack once base case resolves</li>
+        </ul>
         <div className="recursion-formula">
           <code>f(n) = n × f(n−1)</code>&nbsp;&nbsp;<code>f(0) = 1</code>
         </div>
@@ -54,13 +60,13 @@ export const RecursionA = forwardRef((props, ref) => {
 
         <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Every Recursive Function Needs</h3>
         <ul className="fact-list">
-          <li><strong>1. Base case:</strong> the condition that stops recursion. Without it → Stack Overflow.</li>
-          <li><strong>2. Recursive case:</strong> calls itself with a smaller/simpler version of the problem.</li>
-          <li><strong>3. Progress toward base case:</strong> each call must get closer to the base — never loop forever.</li>
+          <li><strong>Base case:</strong> stops recursion — without it you get a Stack Overflow</li>
+          <li><strong>Recursive case:</strong> calls itself on a smaller / simpler input</li>
+          <li><strong>Progress:</strong> each call must get closer to the base case</li>
         </ul>
         <p className="concept-formula">Base case rule: f(0) or f(1) — whatever makes the answer trivially known.</p>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>7</span>
+      <span className="page-number" style={{ left: "1rem" }}>8</span>
     </div>
   );
 });
@@ -101,7 +107,7 @@ console.log(factorial(4));`}
         />
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>8</span>
+    <span className="page-number" style={{ right: "1rem" }}>9</span>
   </div>
 ));
 RecursionB.displayName = "RecursionB";

@@ -52,6 +52,9 @@ export const TraversalA = forwardRef((props, ref) => {
       <div className="page-inner">
         <div className="concept-tag" style={{ background: "#e63946" }}>DSA</div>
         <h2 className="concept-title">Binary Tree Traversals</h2>
+        <p className="concept-def">
+          Unlike an array, a tree has no single obvious reading order. Each <strong>traversal strategy</strong> visits every node exactly once, but in a different sequence — and the order reveals different things.
+        </p>
 
         <div className="bigo-toggles" style={{ marginBottom: "0.5rem" }}>
           {Object.keys(orders).map(m => (
@@ -82,13 +85,13 @@ export const TraversalA = forwardRef((props, ref) => {
 
         <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Which Traversal for What</h3>
         <ul className="fact-list">
-          <li><strong>Inorder (L→Root→R):</strong> BST → sorted output. Used to validate a BST.</li>
-          <li><strong>Preorder (Root→L→R):</strong> copy/serialize a tree. Root comes out first — good for reconstruction.</li>
-          <li><strong>Postorder (L→R→Root):</strong> delete a tree (children before parent). Used in expression tree evaluation.</li>
-          <li><strong>Level-order (BFS):</strong> find shortest path, print tree level by level. Uses a Queue.</li>
+          <li><strong>Inorder</strong> (L→Root→R): gives sorted output for BST — use to print/validate contents</li>
+          <li><strong>Preorder</strong> (Root→L→R): root first — use to serialize or copy a tree structure</li>
+          <li><strong>Postorder</strong> (L→R→Root): children before parent — use to delete a tree or evaluate expressions</li>
+          <li><strong>Level-order</strong>: row by row via Queue (BFS) — use to find shortest path or print levels</li>
         </ul>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>19</span>
+      <span className="page-number" style={{ left: "1rem" }}>20</span>
     </div>
   );
 });
@@ -118,7 +121,7 @@ export const TraversalB = forwardRef((props, ref) => (
         <ExamCard q="Height of a complete binary tree with n nodes?" a="⌊log₂(n)⌋ — e.g., 7 nodes → height 2." />
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>20</span>
+    <span className="page-number" style={{ right: "1rem" }}>21</span>
   </div>
 ));
 TraversalB.displayName = "TraversalB";

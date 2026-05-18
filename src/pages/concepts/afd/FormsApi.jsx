@@ -1,5 +1,6 @@
 import { forwardRef, useState } from "react";
 import ExamCard from "../../../components/ExamCard";
+import SyntaxBlock from "../../../components/SyntaxBlock";
 
 export const FormsApiA = forwardRef((props, ref) => {
   const [form, setForm] = useState({ name: "", email: "" });
@@ -26,7 +27,7 @@ export const FormsApiA = forwardRef((props, ref) => {
         <div className="concept-tag" style={{ background: "#2563eb" }}>AFD</div>
         <h2 className="concept-title">Forms & Validation</h2>
         <p className="concept-def">
-          <strong>Controlled component</strong>: input value tied to React state via <code>value</code> + <code>onChange</code>.
+          A <strong>controlled component</strong> binds an input&apos;s <code>value</code> to React state and updates it on every keystroke via <code>onChange</code>. React becomes the single source of truth.
         </p>
 
         {submitted ? (
@@ -54,13 +55,13 @@ export const FormsApiA = forwardRef((props, ref) => {
 
         <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Controlled vs Uncontrolled Inputs</h3>
         <ul className="fact-list">
-          <li><strong>Controlled:</strong> input value is bound to React state via <code>value</code> + <code>onChange</code>. React is the single source of truth — you always know the current value.</li>
-          <li><strong>Uncontrolled:</strong> input manages its own value in the DOM. Access it via <code>useRef</code> + <code>ref.current.value</code> only when needed (e.g. on submit).</li>
-          <li><strong>Use controlled</strong> when you need real-time validation, conditional rendering, or derived state from the input.</li>
-          <li><strong>Use uncontrolled</strong> for simple file inputs or integrating with non-React libraries.</li>
+          <li><strong>Controlled:</strong> value tied to state via <code>onChange</code> — React always knows the value</li>
+          <li><strong>Uncontrolled:</strong> DOM owns the value; read it on submit via <code>useRef</code></li>
+          <li><strong>Use controlled:</strong> real-time validation, derived state, conditional submit button</li>
+          <li><strong>Use uncontrolled:</strong> file inputs, or integrating with non-React DOM libraries</li>
         </ul>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>27</span>
+      <span className="page-number" style={{ left: "1rem" }}>28</span>
     </div>
   );
 });
@@ -79,17 +80,17 @@ export const FormsApiB = forwardRef((props, ref) => {
   };
 
   return (
-    <div ref={ref} className="book-page concept-page concept-page--right">
+      <div ref={ref} className="book-page concept-page concept-page--right">
       <div className="page-inner">
         <h3 className="concept-subtitle">API Fetch / Axios Demo</h3>
-        <pre className="code-snippet" style={{ fontSize: "0.68rem" }}>{`useEffect(() => {
+        <SyntaxBlock language="javascript" title="fetch-user.js" code={`useEffect(() => {
   setLoading(true);
   fetch('/api/user')
     .then(r => r.json())
     .then(data => setData(data))
     .catch(err => setError(err))
     .finally(() => setLoading(false));
-}, []);`}</pre>
+}, []);`} />
 
         <div className="live-demo" style={{ marginTop: "0.5rem" }}>
           <div className="live-demo__label">Simulated Fetch</div>
@@ -109,7 +110,7 @@ export const FormsApiB = forwardRef((props, ref) => {
           <ExamCard q="What does e.preventDefault() do in form?" a="Stops the default browser submit (page reload). Lets React handle the submission instead." />
         </div>
       </div>
-      <span className="page-number" style={{ right: "1rem" }}>28</span>
+      <span className="page-number" style={{ right: "1rem" }}>29</span>
     </div>
   );
 });

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SyntaxBlock from "./SyntaxBlock";
 
 export default function CodeRunner({ code, language = "javascript", outputs = [] }) {
   const [ran, setRan] = useState(false);
@@ -22,7 +23,9 @@ export default function CodeRunner({ code, language = "javascript", outputs = []
           {ran && <button className="reset-btn" onClick={reset}>↺</button>}
         </div>
       </div>
-      <pre className="code-runner__code"><code>{code}</code></pre>
+        <div style={{ padding: "0 0.75rem 0" }}>
+          <SyntaxBlock code={code} language={language} showLineNumbers={true} title={`main.${language === "javascript" ? "js" : language}`} />
+        </div>
       {ran && (
         <div className="code-runner__output">
           <span className="output-label">Output:</span>

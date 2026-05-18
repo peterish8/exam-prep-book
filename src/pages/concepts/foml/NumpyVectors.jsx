@@ -1,5 +1,6 @@
 import { forwardRef, useState } from "react";
 import ExamCard from "../../../components/ExamCard";
+import SyntaxBlock from "../../../components/SyntaxBlock";
 
 export const NumpyVectorsA = forwardRef((props, ref) => {
   const [a, setA] = useState([1, 2, 3]);
@@ -25,7 +26,7 @@ export const NumpyVectorsA = forwardRef((props, ref) => {
         <div className="concept-tag" style={{ background: "#16a34a" }}>FOML</div>
         <h2 className="concept-title">NumPy & Vectors</h2>
         <p className="concept-def">
-          NumPy arrays are <strong>vectorized</strong> — operations apply element-wise without Python loops. Much faster than lists.
+          Imagine you have two lists of a million numbers and you want to add them element-by-element. In plain Python, you'd write a loop — and Python's loop overhead runs that million times. NumPy sidesteps this entirely: its arrays are stored as contiguous blocks of memory, and operations are dispatched to optimised C and Fortran routines that run on the whole array at once. This is called <strong>vectorization</strong> — you describe what to compute, not how to iterate. The speedup is often 100x or more. Try the calculator below: edit the vectors and switch between add, multiply, and dot product.
         </p>
 
         <div className="live-demo">
@@ -62,22 +63,19 @@ export const NumpyVectorsA = forwardRef((props, ref) => {
           </div>
         </div>
 
-        <pre className="code-snippet" style={{ fontSize: "0.68rem", marginTop: "0.5rem" }}>{`import numpy as np
+        <SyntaxBlock language="python" title="vector-ops.py" code={`import numpy as np
 a = np.array([1, 2, 3])
 b = np.array([4, 5, 6])
 print(a + b)       # [5 7 9]
 print(a * b)       # [4 10 18]
-print(np.dot(a,b)) # 32`}</pre>
+print(np.dot(a,b)) # 32`} />
 
         <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Broadcasting Rules</h3>
-        <ul className="fact-list">
-          <li><strong>What it is:</strong> NumPy automatically expands smaller arrays to match shapes during arithmetic — no explicit loop needed.</li>
-          <li><strong>Rule 1:</strong> if arrays have different numbers of dimensions, prepend 1s to the smaller shape. e.g. (3,) → (1,3).</li>
-          <li><strong>Rule 2:</strong> dimensions of size 1 are stretched to match the other array's size.</li>
-          <li><strong>Example:</strong> shape (3,1) + shape (1,4) → both broadcast to (3,4). Shape (3,) + scalar → adds scalar to every element.</li>
-        </ul>
+        <p className="concept-def">
+          Broadcasting is NumPy's way of making mismatched shapes work together without copying data. Imagine adding a single number to every element of a million-row array — instead of creating a million-element copy of that number, NumPy <em>pretends</em> it's already the right shape and computes on the fly. The rules are: if two arrays have different numbers of dimensions, NumPy prepends 1s to the smaller shape — so a shape (3,) becomes (1, 3). Then any dimension that is size 1 gets "stretched" to match the other array. So shape (3, 1) plus shape (1, 4) both broadcast up to (3, 4), giving a full 3×4 result grid — with zero extra memory for the expansion.
+        </p>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>39</span>
+      <span className="page-number" style={{ left: "1rem" }}>40</span>
     </div>
   );
 });
@@ -85,9 +83,9 @@ NumpyVectorsA.displayName = "NumpyVectorsA";
 
 export const NumpyVectorsB = forwardRef((props, ref) => (
   <div ref={ref} className="book-page concept-page concept-page--right">
-    <div className="page-inner">
-      <h3 className="concept-subtitle">NumPy Cheatsheet</h3>
-      <pre className="code-snippet" style={{ fontSize: "0.66rem" }}>{`np.array([1,2,3])          # from list
+      <div className="page-inner">
+        <h3 className="concept-subtitle">NumPy Cheatsheet</h3>
+      <SyntaxBlock language="python" title="numpy-cheatsheet.py" code={`np.array([1,2,3])          # from list
 np.zeros((3,3))            # 3x3 zeros
 np.ones((2,4))             # 2x4 ones
 np.arange(0, 10, 2)        # [0,2,4,6,8]
@@ -100,7 +98,7 @@ arr[:, 1]    # all rows, col 1
 arr[arr > 2] # boolean mask
 
 np.mean(arr), np.std(arr)  # stats
-np.sum(arr, axis=0)         # col sums`}</pre>
+np.sum(arr, axis=0)         # col sums`} />
 
       <h3 className="concept-subtitle" style={{ marginTop: "0.5rem" }}>Matrix Multiplication</h3>
       <svg width="260" height="80" viewBox="0 0 260 80">
@@ -121,7 +119,7 @@ np.sum(arr, axis=0)         # col sums`}</pre>
         <ExamCard q="Broadcasting in NumPy?" a="Automatically expands smaller arrays to match shapes. e.g., (3,1) + (1,4) → (3,4)." />
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>40</span>
+    <span className="page-number" style={{ right: "1rem" }}>41</span>
   </div>
 ));
 NumpyVectorsB.displayName = "NumpyVectorsB";

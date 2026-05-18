@@ -92,7 +92,7 @@ export const AggregationA = forwardRef((props, ref) => {
         </div>
         <p className="hint-text">Click stages in order to build pipeline</p>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>59</span>
+      <span className="page-number" style={{ left: "1rem" }}>60</span>
     </div>
   );
 });
@@ -125,7 +125,7 @@ export const AggregationB = forwardRef((props, ref) => (
         <ExamCard q="How to count total documents?" a="db.col.countDocuments({}) or aggregate with $count stage or $group {_id:null, total:{$sum:1}}." />
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>60</span>
+    <span className="page-number" style={{ right: "1rem" }}>61</span>
   </div>
 ));
 AggregationB.displayName = "AggregationB";

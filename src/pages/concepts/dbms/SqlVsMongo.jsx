@@ -1,11 +1,15 @@
 import { forwardRef } from "react";
 import ExamCard from "../../../components/ExamCard";
+import SyntaxBlock from "../../../components/SyntaxBlock";
 
 export const SqlVsMongoA = forwardRef((props, ref) => (
   <div ref={ref} className="book-page concept-page">
     <div className="page-inner">
       <div className="concept-tag" style={{ background: "#7c3aed" }}>DBMS</div>
       <h2 className="concept-title">SQL vs MongoDB</h2>
+      <p className="concept-def">
+        Both store data, but they think about it completely differently. SQL databases organise everything into rigid <strong>tables</strong> with fixed columns — every row must conform to the same schema, like a perfectly structured spreadsheet. MongoDB stores data as flexible <strong>documents</strong> (JSON-like objects) inside collections — each document can have different fields, and you can nest arrays and objects directly inside a record without needing a separate table. The comparison table below maps the terminology between the two worlds.
+      </p>
 
       <table className="cheat-table">
         <thead>
@@ -26,12 +30,9 @@ export const SqlVsMongoA = forwardRef((props, ref) => (
       </table>
 
       <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>When to Choose SQL vs MongoDB</h3>
-      <ul className="fact-list">
-        <li><strong>Choose SQL</strong> when data is relational (many joins), schema is stable, and ACID transactions are critical (banking, orders).</li>
-        <li><strong>Choose MongoDB</strong> when schema evolves frequently, data is hierarchical/nested (user profiles with arrays), or you need horizontal scaling.</li>
-        <li><strong>SQL strength:</strong> complex queries with joins across many tables. MongoDB embeds related data to avoid joins entirely.</li>
-        <li><strong>MongoDB strength:</strong> flexible documents — add a new field to one document without altering the whole collection.</li>
-      </ul>
+      <p className="concept-def">
+        Choose <strong>SQL</strong> when your data is naturally relational — you have clear entities that reference each other (users, orders, products) and need complex JOIN queries across tables. SQL also shines when you need strict ACID transactions, like banking or order processing where partial updates are catastrophic. Choose <strong>MongoDB</strong> when your schema evolves frequently (you're still figuring out your data model), when data is naturally hierarchical (a user profile with an array of addresses and an embedded preferences object), or when you need to scale horizontally across many servers. MongoDB's flexibility means adding a new field to some documents doesn't require an ALTER TABLE migration on millions of rows.
+      </p>
 
       <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>MongoDB Architecture</h3>
       <svg width="270" height="100" viewBox="0 0 270 100">
@@ -59,7 +60,7 @@ export const SqlVsMongoA = forwardRef((props, ref) => (
         ))}
       </svg>
     </div>
-    <span className="page-number" style={{ left: "1rem" }}>53</span>
+    <span className="page-number" style={{ left: "1rem" }}>54</span>
   </div>
 ));
 SqlVsMongoA.displayName = "SqlVsMongoA";
@@ -78,7 +79,7 @@ export const SqlVsMongoB = forwardRef((props, ref) => (
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: "0.75rem", color: "#888", marginBottom: "0.3rem" }}>MongoDB Document</div>
-          <pre className="code-snippet" style={{ fontSize: "0.65rem" }}>{`{
+          <SyntaxBlock language="javascript" title="user-document.js" code={`{
   _id: ObjectId("..."),
   name: "Nithy",
   age: 21,
@@ -86,7 +87,7 @@ export const SqlVsMongoB = forwardRef((props, ref) => (
   address: {
     city: "Chennai"
   }
-}`}</pre>
+}`} />
         </div>
       </div>
 
@@ -96,7 +97,7 @@ export const SqlVsMongoB = forwardRef((props, ref) => (
         <ExamCard q="When to choose MongoDB over SQL?" a="Flexible/evolving schema, hierarchical data, horizontal scaling (sharding), unstructured/semi-structured data." />
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>54</span>
+    <span className="page-number" style={{ right: "1rem" }}>55</span>
   </div>
 ));
 SqlVsMongoB.displayName = "SqlVsMongoB";

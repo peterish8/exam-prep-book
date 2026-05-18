@@ -1,5 +1,6 @@
 import { forwardRef, useState, useEffect } from "react";
 import ExamCard from "../../../components/ExamCard";
+import SyntaxBlock from "../../../components/SyntaxBlock";
 
 export const UseEffectA = forwardRef((props, ref) => {
   const [count, setCount] = useState(0);
@@ -16,13 +17,13 @@ export const UseEffectA = forwardRef((props, ref) => {
         <div className="concept-tag" style={{ background: "#2563eb" }}>AFD</div>
         <h2 className="concept-title">useEffect & Virtual DOM</h2>
         <p className="concept-def">
-          <code>useEffect</code> runs side effects after render. Dependency array controls when it runs.
+          <code>useEffect</code> is where you put <strong>side effects</strong> — things like fetching data, timers, and subscriptions. It runs <em>after</em> render, keeping the component function pure.
         </p>
 
-        <pre className="code-snippet" style={{ fontSize: "0.7rem" }}>{`useEffect(() => {
+        <SyntaxBlock language="javascript" title="use-effect.js" code={`useEffect(() => {
   // runs after render
   return () => { /* cleanup */ };
-}, [dependency]); // [] = once, [x] = on x change`}</pre>
+}, [dependency]); // [] = once, [x] = on x change`} />
 
         <div className="live-demo" style={{ marginTop: "0.5rem" }}>
           <div className="live-demo__label">Live Effect Tracker</div>
@@ -46,13 +47,14 @@ export const UseEffectA = forwardRef((props, ref) => {
 
         <h3 className="concept-subtitle" style={{ marginTop: "0.75rem" }}>Dependency Array Rules</h3>
         <ul className="fact-list">
-          <li><strong>No array:</strong> effect runs after every single render — usually a bug, rarely intentional.</li>
-          <li><strong>Empty <code>[]</code>:</strong> runs once after first render (mount). Perfect for API calls, subscriptions.</li>
-          <li><strong><code>[dep]</code>:</strong> runs after mount AND whenever <code>dep</code> changes. React uses <code>Object.is</code> to compare.</li>
-          <li><strong>Cleanup function:</strong> the returned function runs before the next effect and on unmount — use it to cancel timers, unsubscribe, abort fetches.</li>
+          <li><strong>No array:</strong> runs after every render — almost always a mistake</li>
+          <li><strong>Empty <code>[]</code>:</strong> runs once on mount — perfect for one-time API calls</li>
+          <li><strong><code>[dep]</code>:</strong> runs on mount and whenever <code>dep</code> changes</li>
+          <li><strong>Cleanup function:</strong> returned function runs before next effect and on unmount</li>
+          <li><strong>No cleanup = memory leak:</strong> always clear timers, unsubscribe, abort fetches</li>
         </ul>
       </div>
-      <span className="page-number" style={{ left: "1rem" }}>25</span>
+      <span className="page-number" style={{ left: "1rem" }}>26</span>
     </div>
   );
 });
@@ -96,7 +98,7 @@ export const UseEffectB = forwardRef((props, ref) => (
         <ExamCard q="Memory leak in useEffect?" a="Forgetting cleanup — unsubscribe/clearTimeout in the return function to avoid leaks." />
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>26</span>
+    <span className="page-number" style={{ right: "1rem" }}>27</span>
   </div>
 ));
 UseEffectB.displayName = "UseEffectB";

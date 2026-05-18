@@ -39,7 +39,7 @@ export const PlannerA = forwardRef((props, ref) => (
         {schedule.slice(1, 5).map((d, i) => <DayCard key={i} day={d} />)}
       </div>
     </div>
-    <span className="page-number" style={{ left: "1rem" }}>3</span>
+    <span className="page-number" style={{ left: "1rem" }}>4</span>
   </div>
 ));
 PlannerA.displayName = "PlannerA";
@@ -56,7 +56,7 @@ export const PlannerB = forwardRef((props, ref) => (
         {schedule.slice(5).map((d, i) => <DayCard key={i} day={d} />)}
       </div>
     </div>
-    <span className="page-number" style={{ right: "1rem" }}>4</span>
+    <span className="page-number" style={{ right: "1rem" }}>5</span>
   </div>
 ));
 PlannerB.displayName = "PlannerB";
