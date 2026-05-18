@@ -7,7 +7,11 @@ const Cover = forwardRef((props, ref) => {
       <div className="cover-grain" />
       <div className="cover-content">
         <div className="cover-badge">2026 · Semester 2</div>
-        <h1 className="cover-title">Exam<br />Prep</h1>
+        <h1 className="cover-title">
+          Exam
+          <br />
+          Prep
+        </h1>
         <p className="cover-subtitle">Interactive Study Book</p>
         <div className="cover-subjects">
           <span style={{ background: "#e63946" }}>DSA</span>
@@ -16,6 +20,7 @@ const Cover = forwardRef((props, ref) => {
           <span style={{ background: "#7c3aed" }}>DBMS</span>
         </div>
         <p className="cover-hint">← → to flip · click index to jump</p>
+        <p className="cover-credit">by: ~prats</p>
       </div>
     </div>
   );
