@@ -10,7 +10,7 @@ export const NumpyVectorsA = forwardRef((props, ref) => {
   const ops = {
     add: { label: "a + b", fn: (x, y) => x + y, color: "#16a34a" },
     mul: { label: "a * b", fn: (x, y) => x * y, color: "#f59e0b" },
-    dot: { label: "dot(a,b)", fn: null, color: "#2563eb" },
+    dot: { label: "dot(a, b)", fn: null, color: "#2563eb", title: "Dot Product" },
   };
 
   const result = op === "dot"
@@ -45,7 +45,7 @@ export const NumpyVectorsA = forwardRef((props, ref) => {
                 className="vec-input" />
             ))}
           </div>
-          <div className="bigo-toggles" style={{ margin: "0.5rem 0" }}>
+          <div className="bigo-toggles vec-toggles" style={{ margin: "0.5rem 0" }}>
             {Object.entries(ops).map(([k, v]) => (
               <button key={k} className={`bigo-btn ${op === k ? "bigo-btn--on" : ""}`}
                 style={{ "--c": v.color }} onClick={() => setOp(k)}>
@@ -53,11 +53,16 @@ export const NumpyVectorsA = forwardRef((props, ref) => {
               </button>
             ))}
           </div>
-          <div className="vec-result">
-            <span className="vec-label" style={{ color: ops[op].color }}>
-              {ops[op].label} =
-            </span>
-            <span style={{ color: "#fff", fontWeight: 700 }}>
+          <div className={`vec-result${op === "dot" ? " vec-result--dot" : ""}`}>
+            <div className="vec-result__meta">
+              <span className="vec-result__title" style={{ color: ops[op].color }}>
+                {op === "dot" ? ops[op].title : ops[op].label}
+              </span>
+              <span className="vec-result__expr">
+                {ops[op].label} =
+              </span>
+            </div>
+            <span className="vec-result__value">
               {op === "dot" ? result[0] : `[${result.join(", ")}]`}
             </span>
           </div>

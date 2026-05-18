@@ -75,7 +75,7 @@ export const FormsApiB = forwardRef((props, ref) => {
     setStatus("loading"); setData(null);
     setTimeout(() => {
       setStatus("success");
-      setData({ id: 1, name: "Nithy", role: "Developer" });
+      setData({ id: 1, name: "Prats", role: "Developer" });
     }, 1200);
   };
 

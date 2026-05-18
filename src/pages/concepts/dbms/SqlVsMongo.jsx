@@ -74,14 +74,14 @@ export const SqlVsMongoB = forwardRef((props, ref) => (
           <div style={{ fontSize: "0.75rem", color: "#888", marginBottom: "0.3rem" }}>SQL Row</div>
           <table className="cheat-table">
             <thead><tr><th>id</th><th>name</th><th>age</th></tr></thead>
-            <tbody><tr><td>1</td><td>Nithy</td><td>21</td></tr></tbody>
+            <tbody><tr><td>1</td><td>Prats</td><td>21</td></tr></tbody>
           </table>
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: "0.75rem", color: "#888", marginBottom: "0.3rem" }}>MongoDB Document</div>
           <SyntaxBlock language="javascript" title="user-document.js" code={`{
   _id: ObjectId("..."),
-  name: "Nithy",
+  name: "Prats",
   age: 21,
   hobbies: ["code", "music"],
   address: {

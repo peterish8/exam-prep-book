@@ -38,10 +38,15 @@ import { ConfusionMatrixA, ConfusionMatrixB } from "./pages/concepts/foml/Confus
 import { BiasVarianceA, BiasVarianceB } from "./pages/concepts/foml/BiasVariance";
 
 // DBMS
-import { SqlVsMongoA, SqlVsMongoB } from "./pages/concepts/dbms/SqlVsMongo";
-import { CrudOpsA, CrudOpsB } from "./pages/concepts/dbms/CrudOps";
-import { IndexShardingA, IndexShardingB } from "./pages/concepts/dbms/IndexSharding";
-import { AggregationA, AggregationB } from "./pages/concepts/dbms/Aggregation";
+import { FoundationsA, FoundationsB } from "./pages/concepts/dbms/Foundations";
+import { DesignA, DesignB } from "./pages/concepts/dbms/Design";
+import { NormalizationA, NormalizationB } from "./pages/concepts/dbms/Normalization";
+import { SqlBasicsA, SqlBasicsB } from "./pages/concepts/dbms/SqlBasics";
+import { SqlAdvancedA, SqlAdvancedB } from "./pages/concepts/dbms/SqlAdvanced";
+import { RelationalTransactionsA, RelationalTransactionsB } from "./pages/concepts/dbms/RelationalTransactions";
+import { MongoFoundationsA, MongoFoundationsB } from "./pages/concepts/dbms/MongoFoundations";
+import { MongoCrudA, MongoCrudB } from "./pages/concepts/dbms/MongoCrud";
+import { MongoPerformanceA, MongoPerformanceB } from "./pages/concepts/dbms/MongoPerformance";
 
 import "./styles/book.css";
 
@@ -75,10 +80,15 @@ const PAGES = [
   RegressionA, RegressionB,
   ConfusionMatrixA, ConfusionMatrixB,
   BiasVarianceA, BiasVarianceB,
-  SqlVsMongoA, SqlVsMongoB,
-  CrudOpsA, CrudOpsB,
-  IndexShardingA, IndexShardingB,
-  AggregationA, AggregationB,
+  FoundationsA, FoundationsB,
+  DesignA, DesignB,
+  NormalizationA, NormalizationB,
+  SqlBasicsA, SqlBasicsB,
+  SqlAdvancedA, SqlAdvancedB,
+  RelationalTransactionsA, RelationalTransactionsB,
+  MongoFoundationsA, MongoFoundationsB,
+  MongoCrudA, MongoCrudB,
+  MongoPerformanceA, MongoPerformanceB,
   BackCover,
 ];
 
@@ -102,10 +112,10 @@ export default function App() {
     <div className="app-shell">
       <div className="book-stage">
         <button className="flip-zone flip-zone--left" onClick={() => bookRef.current?.prev()} aria-label="Previous page">
-          <span className="flip-zone__icon">‹</span>
+          <span className="flip-zone__icon">&lt;</span>
         </button>
         <button className="flip-zone flip-zone--right" onClick={() => bookRef.current?.next()} aria-label="Next page">
-          <span className="flip-zone__icon">›</span>
+          <span className="flip-zone__icon">&gt;</span>
         </button>
 
         <Book ref={bookRef} onFlip={setCurrentPage}>
@@ -119,16 +129,16 @@ export default function App() {
 
       <button
         className={`ui-toggle${showUI ? " ui-toggle--open" : ""}`}
-        onClick={() => setShowUI(s => !s)}
+        onClick={() => setShowUI((s) => !s)}
         aria-label={showUI ? "Hide controls" : "Show controls"}
       >
-        {showUI ? "✕" : "☰"}
+        {showUI ? "x" : "|||"}
       </button>
 
       {showUI && (
         <div className="ui-overlay">
           <nav className="app-nav">
-            {NAV_ITEMS.map(item => (
+            {NAV_ITEMS.map((item) => (
               <button key={item.label} className="nav-btn"
                 data-subj={item.subj || ""}
                 onClick={() => jumpTo(item.page)}>
@@ -138,11 +148,11 @@ export default function App() {
           </nav>
           <div className="overlay-row">
             <div className="flip-btns">
-              <button className="flip-btn" onClick={() => bookRef.current?.prev()} title="Previous (←)">‹</button>
-              <button className="flip-btn" onClick={() => bookRef.current?.next()} title="Next (→)">›</button>
+              <button className="flip-btn" onClick={() => bookRef.current?.prev()} title="Previous">&lt;</button>
+              <button className="flip-btn" onClick={() => bookRef.current?.next()} title="Next">&gt;</button>
             </div>
             <span className="page-info">
-              Page {currentPage + 1} / {PAGES.length} &nbsp;·&nbsp; ← → to flip
+              Page {currentPage + 1} / {PAGES.length} - use arrows or tap corners to flip
             </span>
           </div>
         </div>
