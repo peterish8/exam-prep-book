@@ -17,10 +17,11 @@
   --radius: 6px;
 }
 
-html, body { height: 100%; background: #07070f; overflow: hidden; font-size: 139.15%; }
+html, body { height: 100%; min-height: 100svh; background: #07070f; overflow: hidden; font-size: 139.15%; }
 
 #root {
   height: 100vh;
+  min-height: 100svh;
   user-select: none;
   font-family: var(--sans);
 }
@@ -29,7 +30,7 @@ html, body { height: 100%; background: #07070f; overflow: hidden; font-size: 139
 .app-shell { position: fixed; inset: 0; overflow: hidden; }
 
 /* ─── Book Stage (full screen, centered) ─── */
-.book-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.book-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 0.25rem; }
 
 /* ─── Corner Flip Zones ─── */
 .flip-zone {
@@ -110,7 +111,29 @@ html, body { height: 100%; background: #07070f; overflow: hidden; font-size: 139
 .flip-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
 
 /* ─── Flipbook wrapper ─── */
-.flip-book { box-shadow: 0 30px 80px rgba(0,0,0,0.7); }
+.flip-book {
+  box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+  max-width: 100vw;
+  max-height: 100svh;
+}
+
+.flip-book,
+.flip-book > div {
+  touch-action: pan-y pinch-zoom;
+}
+
+.mobile-book {
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  max-height: 100svh;
+  overflow: hidden;
+}
+
+.mobile-book > .book-page {
+  width: 100%;
+  height: 100%;
+}
 
 /* ─── Book Page ─── */
 .book-page {
@@ -150,6 +173,8 @@ html, body { height: 100%; background: #07070f; overflow: hidden; font-size: 139
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.08) transparent;
 }
@@ -300,7 +325,10 @@ html, body { height: 100%; background: #07070f; overflow: hidden; font-size: 139
   font-family: var(--mono); font-size: 0.65rem; color: var(--ink-dim);
   flex: none; min-width: 100px;
 }
-.session-task { font-size: 0.72rem; color: var(--ink-dim); line-height: 1.4; }
+.session-task {
+  font-size: 0.72rem; color: var(--ink-dim); line-height: 1.4;
+  flex: 1; min-width: 0; overflow-wrap: anywhere; word-break: break-word;
+}
 
 /* ─── Concept pages ─── */
 .concept-tag {
@@ -369,6 +397,8 @@ html, body { height: 100%; background: #07070f; overflow: hidden; font-size: 139
   margin-bottom: 0.75rem; border: 1px solid rgba(245,158,11,0.22);
   box-shadow: 0 14px 32px rgba(0,0,0,0.18);
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* ─── Tables ─── */
@@ -415,6 +445,8 @@ html, body { height: 100%; background: #07070f; overflow: hidden; font-size: 139
   display: flex; justify-content: space-between; align-items: center;
   padding: 0.4rem 0.75rem; background: rgba(255,255,255,0.04);
   border-bottom: 1px solid rgba(255,255,255,0.06);
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 .code-runner__lang { font-size: 0.65rem; color: var(--ink-dim); text-transform: uppercase; letter-spacing: 0.1em; }
 .code-runner__btns { display: flex; gap: 0.4rem; }
@@ -468,6 +500,8 @@ html, body { height: 100%; background: #07070f; overflow: hidden; font-size: 139
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 14px;
   box-shadow: 0 14px 32px rgba(0,0,0,0.18);
+  width: 100%;
+  max-width: 300px;
 }
 
 /* ─── Stepper ─── */
@@ -589,14 +623,25 @@ html, body { height: 100%; background: #07070f; overflow: hidden; font-size: 139
 /* ─── Fact list ─── */
 .fact-list { list-style: none; padding: 0; }
 .fact-list li {
-  font-size: 0.78rem; color: var(--ink); padding: 0.3rem 0.6rem 0.3rem 1rem;
+  font-size: 0.78rem; color: var(--ink); padding: 0.3rem 0.6rem 0.3rem 1.2rem;
   position: relative; line-height: 1.45; margin-bottom: 0.24rem;
   background: linear-gradient(90deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
   border: 1px solid rgba(255,255,255,0.05);
   border-radius: 10px;
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
 }
-.fact-list li::before { content: "·"; position: absolute; left: 0; color: var(--ink-dim); }
+.fact-list li::before {
+  content: "";
+  position: absolute;
+  left: 0.48rem;
+  top: 50%;
+  width: 0.28rem;
+  height: 0.28rem;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(148,163,184,0.55));
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+}
 
 /* ─── Exam Cards ─── */
 .exam-cards { display: flex; flex-direction: column; gap: 0.4rem; }
@@ -772,6 +817,13 @@ html, body { height: 100%; background: #07070f; overflow: hidden; font-size: 139
 /* ─── Misc ─── */
 code { font-family: var(--mono); font-size: 0.82em; color: #93c5fd; }
 
+img,
+svg,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
@@ -780,6 +832,26 @@ code { font-family: var(--mono); font-size: 0.82em; color: #93c5fd; }
 /* ─── Mobile responsive ─── */
 @media (max-width: 767px) {
   html, body { font-size: 121%; }
+
+  body { overflow: hidden; }
+
+  #root,
+  .app-shell,
+  .book-stage {
+    min-height: 100svh;
+  }
+
+  .book-stage {
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 0;
+  }
+
+  .flip-book {
+    width: 100vw !important;
+    height: 100svh !important;
+    box-shadow: none;
+  }
 
   /* Move flip zones to bottom corners on mobile (thumbs reach there) */
   .flip-zone { width: 72px; height: 72px; opacity: 0.5; top: auto; bottom: 0; }
@@ -796,26 +868,83 @@ code { font-family: var(--mono); font-size: 0.82em; color: #93c5fd; }
   .ui-toggle { width: 44px; height: 44px; font-size: 1.08rem; }
 
   /* Overlay compact on mobile */
-  .ui-overlay { padding: 0.75rem 0.75rem 1rem; gap: 0.5rem; }
+  .ui-overlay {
+    padding: 0.75rem 0.75rem calc(1rem + env(safe-area-inset-bottom));
+    gap: 0.5rem;
+  }
   .app-nav { gap: 0.35rem; }
   .nav-btn { padding: 0.45rem 0.7rem; font-size: 0.8rem; }
   .flip-btn { width: 44px; height: 44px; font-size: 1.1rem; }
   .page-info { font-size: 0.75rem; }
-  .page-inner { padding: 1.25rem 3.2rem 1rem 0.95rem; }
+  .page-inner { padding: 3.9rem 0.85rem 4.9rem; }
+
+  .overlay-row {
+    flex-direction: column;
+    gap: 0.45rem;
+  }
 
   /* Concept pages smaller headings */
   .concept-title { font-size: 1.2rem; }
   .planner-title { font-size: 1.1rem; }
   .cover-title { font-size: 2.8rem; }
+  .cover-subjects { gap: 0.35rem; }
+  .cover-subjects span { font-size: 0.68rem; padding: 0.22rem 0.58rem; }
+  .cover-credit { right: 1rem; bottom: 1rem; font-size: 0.72rem; }
+  .cover-content { padding: 1.35rem 1rem 2.8rem; }
 
   /* Session time wrapping */
-  .session-time { min-width: 80px; font-size: 0.6rem; }
-  .session-task { font-size: 0.68rem; }
+  .day-card { padding: 0.48rem 0.55rem; }
+  .day-card__header {
+    flex-wrap: wrap;
+    gap: 0.32rem;
+    align-items: flex-start;
+  }
+  .day-card__subject {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+  .day-card__session {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.12rem;
+  }
+  .session-time { min-width: 0; font-size: 0.58rem; }
+  .session-task { font-size: 0.66rem; }
 
   /* Array cells smaller on mobile */
   .array-cell { width: 30px; height: 30px; font-size: 0.72rem; }
 
   .stack-dryrun-grid { grid-template-columns: 1fr; }
+  .cm-grid { grid-template-columns: 60px 1fr 1fr; }
+  .window-slider__header,
+  .window-panel__top { gap: 0.5rem; }
+  .concept-formula {
+    font-size: 0.68rem;
+    padding: 0.42rem 0.55rem;
+  }
+  .bigo-toggles {
+    gap: 0.3rem;
+    justify-content: center;
+  }
+  .bigo-btn {
+    font-size: 0.66rem;
+    padding: 0.24rem 0.52rem;
+  }
+  .bigo-chart {
+    max-width: 100%;
+  }
+  .hint-text {
+    text-align: center;
+    padding: 0 0.1rem;
+  }
+  .code-runner__header,
+  .window-slider__actions,
+  .stepper-btns {
+    flex-wrap: wrap;
+  }
+  .code-runner__btns {
+    margin-left: auto;
+  }
 }
 
 .syntax-block { margin-bottom: 0.55rem; }
