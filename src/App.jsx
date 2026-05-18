@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import Book from "./components/Book";
 import Cover from "./pages/Cover";
 import InsideCover from "./pages/InsideCover";
@@ -146,6 +147,8 @@ export default function App() {
           </div>
         </div>
       )}
+
+      <Analytics />
     </div>
   );
 }
