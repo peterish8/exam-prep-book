@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 import App from "./App.jsx";
 import QuizRoot from "./pages/quiz/QuizRoot.jsx";
@@ -18,6 +18,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/print" element={<PrintBook />} />
         <Route path="/quiz/*" element={<QuizRoot />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   </ConvexProvider>

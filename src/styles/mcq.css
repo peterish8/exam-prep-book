@@ -71,6 +71,13 @@
   font-size: 0.7rem; opacity: 0.7; font-weight: 400;
 }
 
+.mcq-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: center;
+}
+
 .mcq-panel__cta {
   display: flex; align-items: center; gap: 0.5rem;
   background: var(--ink);
@@ -91,6 +98,28 @@
   font-size: 1.1rem; transition: transform 0.2s;
 }
 .mcq-panel__cta:hover .arrow { transform: translateX(4px); }
+
+.mcq-panel__icon-cta {
+  width: 3.1rem;
+  height: 3.1rem;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.05);
+  color: var(--ink);
+  border: 1px solid rgba(255,255,255,0.12);
+  text-decoration: none;
+  font-size: 1.15rem;
+  transition: all 0.2s ease;
+}
+
+.mcq-panel__icon-cta:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
 
 .mcq-panel__note {
   font-family: var(--sans); font-size: 0.73rem;
@@ -1189,6 +1218,15 @@
   font-family: var(--sans); font-size: 0.88rem;
   color: var(--ink); font-weight: 500;
 }
+.lb-row--clickable {
+  cursor: pointer;
+}
+.lb-row--clickable td {
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+.lb-row--clickable:hover td {
+  background: rgba(255,255,255,0.035);
+}
 .lb-row--gold .lb-name {
   font-weight: 700;
   background: linear-gradient(135deg, #f5c842, #fbbf24, #f97316);
@@ -1206,6 +1244,13 @@
   display: inline-block; font-size: 0.8rem;
   animation: lb-crown-spin 4s ease-in-out infinite;
   transform-origin: center bottom;
+}
+.lb-attempts {
+  display: inline-block;
+  margin-left: 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: rgba(232,228,240,0.42);
 }
 @keyframes lb-crown-spin {
   0%, 85%, 100% { transform: rotate(0deg); }
@@ -1229,6 +1274,110 @@
 .lb-pct--green { color: #4ade80; background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.18); }
 .lb-pct--amber { color: #fbbf24; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.18); }
 .lb-pct--red   { color: #f87171; background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.18); }
+
+.lb-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 260;
+  background: rgba(5, 5, 12, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.lb-modal {
+  width: min(680px, 100%);
+  max-height: min(78vh, 760px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background:
+    radial-gradient(circle at top right, rgba(124,58,237,0.12), transparent 28%),
+    linear-gradient(180deg, rgba(18,18,31,0.98), rgba(12,12,22,0.98));
+  box-shadow: 0 32px 80px rgba(0,0,0,0.52);
+  padding: 1.3rem;
+}
+
+.lb-modal__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.lb-modal__eyebrow {
+  margin: 0 0 0.3rem;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(232,228,240,0.45);
+}
+
+.lb-modal__title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.lb-modal__sub {
+  margin: 0.45rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: rgba(232,228,240,0.6);
+}
+
+.lb-modal__close {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  color: var(--ink);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.lb-modal__list {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-right: 0.2rem;
+}
+
+.lb-history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+}
+
+.lb-history-item__left,
+.lb-history-item__right {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.lb-history-item__date {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: rgba(232,228,240,0.48);
+}
 
 /* ─── Name Modal ─── */
 .name-modal-overlay {

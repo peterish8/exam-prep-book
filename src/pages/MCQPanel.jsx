@@ -11,7 +11,9 @@ export default function MCQPanel({ visible }) {
         <div className="mcq-panel__badge">Practice Mode</div>
 
         <h2 className="mcq-panel__heading">
-          Test Your<br />Knowledge
+          Test Your
+          <br />
+          Knowledge
         </h2>
 
         <p className="mcq-panel__tagline">
@@ -38,9 +40,19 @@ export default function MCQPanel({ visible }) {
           })}
         </div>
 
-        <Link to="/quiz" className="mcq-panel__cta">
-          Start Quiz <span className="arrow">→</span>
-        </Link>
+        <div className="mcq-panel__actions">
+          <Link to="/quiz" className="mcq-panel__cta">
+            Start Quiz <span className="arrow">→</span>
+          </Link>
+          <Link
+            to="/leaderboard"
+            className="mcq-panel__icon-cta"
+            aria-label="Open leaderboard"
+            title="Leaderboard"
+          >
+            🏆
+          </Link>
+        </div>
 
         <p className="mcq-panel__note">
           Pick any subject · reference card always visible · results at the end
