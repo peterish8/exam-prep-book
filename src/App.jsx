@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import Book from "./components/Book";
 import Cover from "./pages/Cover";
@@ -6,6 +7,7 @@ import InsideCover from "./pages/InsideCover";
 import BackCover from "./pages/BackCover";
 import Toc from "./pages/Toc";
 import { PlannerA, PlannerB } from "./pages/PlannerSpread";
+import MCQPanel from "./pages/MCQPanel";
 
 // DSA
 import { BigOA, BigOB } from "./pages/concepts/dsa/BigO";
@@ -105,11 +107,13 @@ export default function App() {
   const bookRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [showUI, setShowUI] = useState(false);
+  const navigate = useNavigate();
 
   const jumpTo = (page) => bookRef.current?.flip(page);
 
   return (
     <div className="app-shell">
+      <MCQPanel visible={currentPage === 0} />
       <div className="book-stage">
         <button className="flip-zone flip-zone--left" onClick={() => bookRef.current?.prev()} aria-label="Previous page">
           <span className="flip-zone__icon">&lt;</span>
@@ -145,6 +149,9 @@ export default function App() {
                 {item.label}
               </button>
             ))}
+            <button className="nav-btn nav-btn--quiz" onClick={() => { navigate("/quiz"); setShowUI(false); }}>
+              Quiz ✦
+            </button>
           </nav>
           <div className="overlay-row">
             <div className="flip-btns">

@@ -93,6 +93,18 @@ html, body { height: 100%; min-height: 100svh; background: #07070f; overflow: hi
 .nav-btn[data-subj="AFD"] { color: var(--accent-afd); }
 .nav-btn[data-subj="FOML"] { color: var(--accent-foml); }
 .nav-btn[data-subj="DBMS"] { color: var(--accent-dbms); }
+.nav-btn--quiz {
+  color: #f5c842;
+  border-color: rgba(245,200,66,0.25);
+  background: rgba(245,200,66,0.07);
+  font-weight: 600;
+}
+.nav-btn--quiz:hover {
+  background: rgba(245,200,66,0.15);
+  border-color: rgba(245,200,66,0.5);
+  color: #f5c842;
+  box-shadow: 0 0 12px rgba(245,200,66,0.15);
+}
 
 .page-info { font-size: 0.78rem; color: var(--ink-dim); }
 
