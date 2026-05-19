@@ -1,5 +1,6 @@
 import { forwardRef, useState } from "react";
 import ExamCard from "../../../components/ExamCard";
+import MemoryBox from "../../../components/MemoryBox";
 
 const BST_DATA = {
   val: 50,
@@ -113,6 +114,16 @@ export const TreeB = forwardRef((props, ref) => (
           <tr><td>Delete</td><td>O(log n)</td><td>O(n)</td></tr>
         </tbody>
       </table>
+      <MemoryBox
+        title="BST Recall"
+        accent="#e63946"
+        mnemonic="LNR = Left smaller, Node middle, Right bigger"
+        items={[
+          { label: "Search", text: "compare once, discard one whole subtree" },
+          { label: "Inorder", text: "left -> root -> right gives sorted order" },
+          { label: "Skewed", text: "sorted insertions turn BST into O(n)" },
+        ]}
+      />
 
       <div className="exam-cards" style={{ marginTop: "0.75rem" }}>
         <ExamCard q="BST vs Binary Tree?" a="BST has ordering property (left < root < right). Binary Tree does not." />

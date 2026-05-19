@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 import ExamCard from "../../../components/ExamCard";
+import MemoryBox from "../../../components/MemoryBox";
 import SyntaxBlock from "../../../components/SyntaxBlock";
 
 export const SqlBasicsA = forwardRef((props, ref) => (
@@ -59,6 +60,17 @@ export const SqlBasicsB = forwardRef((props, ref) => (
 );
 
 INSERT INTO students VALUES (101, 'Prats', 'CSE');`}
+      />
+      <MemoryBox
+        title="SQL Recall"
+        accent="#7c3aed"
+        mnemonic="SWOL = SELECT, WHERE, ORDER BY, LIMIT"
+        items={[
+          { label: "DDL", text: "changes structure: CREATE, ALTER, DROP" },
+          { label: "DML", text: "changes rows: INSERT, UPDATE, DELETE" },
+          { label: "DCL", text: "controls permissions: GRANT, REVOKE" },
+          { label: "TCL", text: "controls transactions: COMMIT, ROLLBACK" },
+        ]}
       />
 
       <div className="exam-cards">

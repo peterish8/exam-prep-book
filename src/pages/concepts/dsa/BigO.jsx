@@ -10,6 +10,11 @@ const complexities = [
   { label: "O(2^n)", color: "#7c3aed", fn: (n) => Math.pow(2, n), desc: "Exponential - Tower of Hanoi, subsets" },
 ];
 
+const rankedComplexities = complexities.map((item, index) => ({
+  ...item,
+  rank: index + 1,
+}));
+
 function BigOChart({ active }) {
   const w = 300;
   const h = 180;
@@ -120,18 +125,37 @@ export const BigOB = forwardRef((props, ref) => (
   <div ref={ref} className="book-page concept-page concept-page--right">
     <div className="page-inner">
       <h3 className="concept-subtitle">Complexity Cheatsheet</h3>
-      <table className="cheat-table">
-        <thead><tr><th>Notation</th><th>Name</th><th>Example</th></tr></thead>
-        <tbody>
-          {complexities.map((c, i) => (
-            <tr key={i}>
-              <td style={{ color: c.color, fontWeight: 700 }}>{c.label}</td>
-              <td>{c.desc.split("-")[0].trim()}</td>
-              <td style={{ fontSize: "0.75rem" }}>{c.desc.split("-")[1]?.trim()}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="bigo-cheatsheet-layout">
+        <div className="bigo-cheatsheet-head">
+          <p className="bigo-cheatsheet-head__order">
+            <span className="bigo-cheatsheet-head__label">Ascending order:</span> O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n^2) &lt; O(2^n)
+          </p>
+        </div>
+        <table className="cheat-table">
+          <thead><tr><th>Rank</th><th>Notation</th><th>Name</th><th>Example</th><th>Order</th></tr></thead>
+          <tbody>
+            {rankedComplexities.map((c) => (
+              <tr key={c.label}>
+                <td>
+                  <span className="bigo-rank-badge">{c.rank}</span>
+                </td>
+                <td style={{ color: c.color, fontWeight: 700 }}>{c.label}</td>
+                <td>{c.desc.split("-")[0].trim()}</td>
+                <td style={{ fontSize: "0.75rem" }}>{c.desc.split("-")[1]?.trim()}</td>
+                <td>
+                  <div className="bigo-inline-order">
+                    <span className="bigo-inline-order__label">#{c.rank}</span>
+                    <div
+                      className="bigo-inline-order__bar"
+                      style={{ "--bar-color": c.color, "--bar-fill": `${26 + c.rank * 11}%` }}
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <div className="exam-cards">
         <ExamCard

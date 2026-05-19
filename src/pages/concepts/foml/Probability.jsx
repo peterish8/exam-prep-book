@@ -1,5 +1,6 @@
 import { forwardRef, useState } from "react";
 import ExamCard from "../../../components/ExamCard";
+import MemoryBox from "../../../components/MemoryBox";
 
 function normalPDF(x, mu, sigma) {
   return (1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * ((x - mu) / sigma) ** 2);
@@ -94,6 +95,17 @@ export const ProbabilityB = forwardRef((props, ref) => (
         <li><strong>Empirical rule:</strong> 68%, 95%, 99.7%</li>
         <li><strong>Expectation / variance:</strong> center and spread of a distribution</li>
       </ul>
+      <MemoryBox
+        title="Probability Recall"
+        accent="#16a34a"
+        mnemonic="MSS = Mean sets center, Sigma sets spread, Shape tells the story"
+        items={[
+          { label: "PMF", text: "discrete probability values" },
+          { label: "PDF", text: "continuous density curve" },
+          { label: "CDF", text: "accumulated probability up to x" },
+          { label: "68-95-99.7", text: "normal curve shortcut for 1, 2, 3 sigma" },
+        ]}
+      />
 
       <div className="exam-cards">
         <ExamCard q="When to use Binomial vs Normal?" a="Binomial is discrete with fixed trials. Normal is continuous and often used as an approximation." />

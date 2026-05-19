@@ -1,5 +1,6 @@
 import { forwardRef, useState } from "react";
 import ExamCard from "../../../components/ExamCard";
+import MemoryBox from "../../../components/MemoryBox";
 import SyntaxBlock from "../../../components/SyntaxBlock";
 
 const JSX_DEMO = `// JSX  (looks like HTML but it's JS!)
@@ -83,6 +84,16 @@ export const ReactCoreB = forwardRef((props, ref) => (
         <line x1="210" y1="88" x2="250" y2="115" stroke="#555" />
         <text x="140" y="165" textAnchor="middle" fontSize="10" fill="#666">Props flow DOWN ↓ · Events bubble UP ↑</text>
       </svg>
+      <MemoryBox
+        title="React Core Recall"
+        accent="#2563eb"
+        mnemonic="CPR = Components compose UI, Props go down, React reconciles changes"
+        items={[
+          { label: "JSX", text: "HTML-like syntax that compiles to JS calls" },
+          { label: "props", text: "read-only data from parent to child" },
+          { label: "VDOM", text: "React diffs old and new tree, then patches real DOM" },
+        ]}
+      />
 
       <div className="exam-cards">
         <ExamCard q="Functional vs Class component?" a="Functional: simple function returning JSX, uses hooks. Class: extends React.Component, uses this.state & lifecycle methods." />

@@ -1,5 +1,6 @@
 import { forwardRef, useState } from "react";
 import ExamCard from "../../../components/ExamCard";
+import MemoryBox from "../../../components/MemoryBox";
 
 const TREE = {
   val: 1,
@@ -110,6 +111,18 @@ export const TraversalB = forwardRef((props, ref) => (
           <tr><td>Level-order</td><td>BFS row by row</td><td>1,2,3,4,5,6,7</td></tr>
         </tbody>
       </table>
+
+      <MemoryBox
+        title="Binary Tree Traversal Recall"
+        accent="#2563eb"
+        mnemonic="In = middle, Pre = parent first, Post = parent last, Level = queue by queue"
+        items={[
+          { label: "Inorder", text: "L -> Root -> R. BST gives sorted output." },
+          { label: "Preorder", text: "Root -> L -> R. Good for copy or serialize." },
+          { label: "Postorder", text: "L -> R -> Root. Good for delete or evaluate." },
+          { label: "Level", text: "BFS with queue. Visit tree row by row." },
+        ]}
+      />
 
       <p className="concept-def" style={{ marginTop: "0.75rem", fontSize: "0.8rem" }}>
         <strong>Inorder of BST</strong> always gives sorted ascending output.

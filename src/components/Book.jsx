@@ -71,9 +71,13 @@ const Book = forwardRef(({ children, onFlip }, ref) => {
   }));
 
   useEffect(() => {
-    const onResize = () => setDims(getDims());
+    let timer;
+    const onResize = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => setDims(getDims()), 120);
+    };
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    return () => { window.removeEventListener("resize", onResize); clearTimeout(timer); };
   }, []);
 
   useEffect(() => {
@@ -129,6 +133,7 @@ const Book = forwardRef(({ children, onFlip }, ref) => {
 
   return (
     <HTMLFlipBook
+      key={`${dims.w}x${dims.h}`}
       ref={flipRef}
       width={dims.w}
       height={dims.h}

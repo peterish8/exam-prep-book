@@ -1,5 +1,6 @@
 import { forwardRef, useState } from "react";
 import ExamCard from "../../../components/ExamCard";
+import MemoryBox from "../../../components/MemoryBox";
 
 export const QueueA = forwardRef((props, ref) => {
   const [queue, setQueue] = useState(["A", "B", "C"]);
@@ -101,6 +102,17 @@ export const QueueB = forwardRef((props, ref) => (
         <text x="100" y="105" textAnchor="middle" fontSize="10" fill="#666">Circular</text>
         <text x="100" y="118" textAnchor="middle" fontSize="10" fill="#666">Queue</text>
       </svg>
+      <MemoryBox
+        title="Queue Recall"
+        accent="#e63946"
+        mnemonic="FIFO = First In, First Out"
+        items={[
+          { label: "enqueue", text: "add at rear" },
+          { label: "dequeue", text: "remove from front" },
+          { label: "circular", text: "reuse freed slots by wrapping around" },
+          { label: "BFS", text: "queue visits nearest nodes first" },
+        ]}
+      />
 
       <div className="exam-cards" style={{ marginTop: "0.5rem" }}>
         <ExamCard

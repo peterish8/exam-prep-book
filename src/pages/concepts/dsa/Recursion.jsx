@@ -1,6 +1,7 @@
 import { forwardRef, useState } from "react";
 import CodeRunner from "../../../components/CodeRunner";
 import ExamCard from "../../../components/ExamCard";
+import MemoryBox from "../../../components/MemoryBox";
 
 const frames = [
   { id: 4, label: "factorial(1)", returns: "1", active: true },
@@ -90,6 +91,16 @@ console.log(factorial(4));`}
           { text: "factorial(0) → 1  [BASE CASE]" },
           { text: "Unwinding... 1→2→6→24" },
           { text: "24" },
+        ]}
+      />
+      <MemoryBox
+        title="Recursion Recall"
+        accent="#e63946"
+        mnemonic="BPP = Base case, Progress to smaller input, Pop answers on unwind"
+        items={[
+          { label: "Base", text: "stopping condition must be trivially solvable" },
+          { label: "Progress", text: "each call must move closer to the base case" },
+          { label: "Unwind", text: "stack returns answers in reverse call order" },
         ]}
       />
       <div className="exam-cards" style={{ marginTop: "1rem" }}>

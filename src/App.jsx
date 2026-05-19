@@ -132,11 +132,11 @@ export default function App() {
       </div>
 
       <button
-        className={`ui-toggle${showUI ? " ui-toggle--open" : ""}`}
+        className={`ui-toggle${showUI ? " ui-toggle--open" : ""}${currentPage === 0 ? " ui-toggle--cover-mobile-hidden" : ""}`}
         onClick={() => setShowUI((s) => !s)}
         aria-label={showUI ? "Hide controls" : "Show controls"}
       >
-        {showUI ? "x" : "|||"}
+        {showUI ? "✕" : "☰"}
       </button>
 
       {showUI && (

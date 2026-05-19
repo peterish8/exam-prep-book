@@ -1,5 +1,6 @@
 import { forwardRef, useState, useEffect } from "react";
 import ExamCard from "../../../components/ExamCard";
+import MemoryBox from "../../../components/MemoryBox";
 import SyntaxBlock from "../../../components/SyntaxBlock";
 
 export const UseEffectA = forwardRef((props, ref) => {
@@ -91,6 +92,16 @@ export const UseEffectB = forwardRef((props, ref) => (
         <rect x="100" y="100" width="80" height="22" rx="4" fill="#16a34a" opacity="0.8" />
         <text x="140" y="115" textAnchor="middle" fontSize="10" fill="#fff">Patch real DOM</text>
       </svg>
+      <MemoryBox
+        title="useEffect Recall"
+        accent="#2563eb"
+        mnemonic="RDC = Render first, Do side-effect after, Cleanup before next run/unmount"
+        items={[
+          { label: "[]", text: "run once on mount" },
+          { label: "[dep]", text: "run on mount and when dep changes" },
+          { label: "cleanup", text: "clear timers, listeners, subscriptions" },
+        ]}
+      />
 
       <div className="exam-cards">
         <ExamCard q="What is the Virtual DOM?" a="A lightweight JS copy of the real DOM. React diffs old vs new VDOM and only patches what changed." />

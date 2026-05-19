@@ -1,8 +1,12 @@
 import { forwardRef } from "react";
+import { Link } from "react-router-dom";
 
 const Cover = forwardRef((props, ref) => {
   return (
     <div ref={ref} className="book-page cover-page">
+      <Link to="/quiz" className="cover-mobile-quiz-btn">
+        Quiz
+      </Link>
       <div className="cover-aura cover-aura--red" />
       <div className="cover-grain" />
       <div className="cover-content">
@@ -20,7 +24,14 @@ const Cover = forwardRef((props, ref) => {
           <span style={{ background: "#7c3aed" }}>DBMS</span>
         </div>
         <p className="cover-hint">← → to flip · click index to jump</p>
-        <p className="cover-credit">by: ~prats</p>
+        <a
+          className="cover-credit"
+          href="https://www.instagram.com/yourboy_prats/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          by: ~prats
+        </a>
       </div>
     </div>
   );

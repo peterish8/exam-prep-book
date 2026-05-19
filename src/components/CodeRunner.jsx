@@ -23,7 +23,7 @@ export default function CodeRunner({ code, language = "javascript", outputs = []
           {ran && <button className="reset-btn" onClick={reset}>↺</button>}
         </div>
       </div>
-        <div style={{ padding: "0 0.75rem 0" }}>
+        <div className="code-runner__editor-wrap">
           <SyntaxBlock code={code} language={language} showLineNumbers={true} title={`main.${language === "javascript" ? "js" : language}`} />
         </div>
       {ran && (

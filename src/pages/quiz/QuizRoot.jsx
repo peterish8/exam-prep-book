@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Navigate, Link } from "react-router-dom";
+import { Routes, Route, Navigate, Link, useLocation } from "react-router-dom";
 import SubjectSelect from "./SubjectSelect.jsx";
 import QuizPage from "./QuizPage.jsx";
 import ResultsPage from "./ResultsPage.jsx";
 import "../../styles/mcq.css";
 
 export default function QuizRoot() {
+  const location = useLocation();
   const [playerName, setPlayerName] = useState(
     () => localStorage.getItem("quizPlayerName") || ""
   );
@@ -25,13 +26,18 @@ export default function QuizRoot() {
     setShowModal(false);
   };
 
+  const showRootHeader =
+    !/^\/quiz\/[^/]+$/.test(location.pathname) || location.pathname === "/quiz/select";
+
   return (
     <div className="quiz-root">
-      <div className="quiz-root__header">
-        <Link to="/" className="quiz-back-btn">← Book</Link>
-        <span className="quiz-root__title">Practice Quiz</span>
-        <Link to="/leaderboard" className="quiz-lb-btn">🏆 Leaderboard</Link>
-      </div>
+      {showRootHeader && (
+        <div className="quiz-root__header">
+          <Link to="/" className="quiz-back-btn" aria-label="Back to book">
+            <span className="quiz-btn__icon" aria-hidden="true">←</span>
+          </Link>
+        </div>
+      )}
 
       {showModal && <NameModal onSubmit={handleName} />}
 
@@ -49,6 +55,7 @@ export default function QuizRoot() {
 
 function NameModal({ onSubmit }) {
   const [name, setName] = useState("");
+
   return (
     <div className="name-modal-overlay">
       <div className="name-modal">
@@ -76,7 +83,7 @@ function NameModal({ onSubmit }) {
             className="name-modal__btn name-modal__btn--ghost"
             onClick={() => onSubmit("")}
           >
-            Skip — stay anonymous
+            Skip - stay anonymous
           </button>
         </div>
       </div>

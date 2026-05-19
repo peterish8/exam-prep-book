@@ -73,11 +73,12 @@ export default function Leaderboard() {
             <tbody>
               {scores.map((s, i) => {
                 const meta = SUBJECT_META[s.subject];
+                const podiumClass = i === 0 ? " lb-row--gold" : i === 1 ? " lb-row--silver" : i === 2 ? " lb-row--bronze" : "";
                 const medals = ["🥇", "🥈", "🥉"];
                 return (
-                  <tr key={s._id || s.id} className={`lb-row${i < 3 ? " lb-row--top" : ""}`}>
-                    <td className="lb-rank">{i < 3 ? medals[i] : i + 1}</td>
-                    <td className="lb-name">{s.name}</td>
+                  <tr key={s._id || s.id} className={`lb-row${i < 3 ? " lb-row--top" + podiumClass : ""}`}>
+                    <td className="lb-rank">{i < 3 ? <span className="lb-medal">{medals[i]}</span> : <span className="lb-rank-num">{i + 1}</span>}</td>
+                    <td className="lb-name">{s.name}{i === 0 && <span className="lb-crown"> 👑</span>}</td>
                     <td>
                       <span
                         className="lb-subject-tag"

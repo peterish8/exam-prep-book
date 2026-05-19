@@ -1,5 +1,6 @@
 import { forwardRef, useState } from "react";
 import ExamCard from "../../../components/ExamCard";
+import MemoryBox from "../../../components/MemoryBox";
 import SyntaxBlock from "../../../components/SyntaxBlock";
 
 const STEPS_ASYNC = [
@@ -95,6 +96,18 @@ function debounce(fn, delay) {
     timer = setTimeout(() => fn(...args), delay);
   };
 }`} />
+
+      <MemoryBox
+        title="Async Recall"
+        accent="#2563eb"
+        mnemonic="A-WAIT = Async returns Promise, Wait inside function, App keeps running, Isolate errors, Then resume"
+        items={[
+          { label: "async", text: "always wraps return value in a Promise" },
+          { label: "await", text: "pauses only this async function, not the whole JS thread" },
+          { label: "throttle", text: "run at most once per time window" },
+          { label: "debounce", text: "run after activity finally stops" },
+        ]}
+      />
 
       <div className="exam-cards" style={{ marginTop: "0.5rem" }}>
         <ExamCard q="Promise.all vs Promise.race?" a="all waits for every Promise. race settles as soon as the first one settles." />
