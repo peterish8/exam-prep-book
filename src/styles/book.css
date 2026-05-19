@@ -94,6 +94,58 @@ html, body { height: 100%; min-height: 100svh; background: #07070f; overflow: hi
   border-color: rgba(255,255,255,0.22);
 }
 
+.print-route {
+  min-height: 100svh;
+  background: #0b0b12;
+  color: var(--ink);
+}
+
+.print-route__bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: rgba(11,11,18,0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.print-route__btn {
+  border: 1px solid rgba(96,165,250,0.28);
+  background: rgba(59,130,246,0.14);
+  color: #dbeafe;
+  border-radius: 999px;
+  padding: 0.55rem 0.95rem;
+  font: 600 0.78rem var(--sans);
+  cursor: pointer;
+}
+
+.print-route__hint {
+  color: rgba(232,228,240,0.68);
+  font-size: 0.72rem;
+}
+
+.print-route__pages {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 1.2rem;
+}
+
+.export-entry .book-page {
+  width: min(100%, 1100px);
+  min-height: auto !important;
+  height: auto !important;
+  margin: 0 auto;
+  overflow: visible !important;
+  box-shadow: 0 18px 48px rgba(0,0,0,0.24);
+}
+
 /* ─── UI Overlay Panel ─── */
 .ui-overlay {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
@@ -119,6 +171,10 @@ html, body { height: 100%; min-height: 100svh; background: #07070f; overflow: hi
   transition: all 0.2s;
 }
 .nav-btn:hover, .nav-btn.active { border-color: currentColor; color: #fff; }
+.nav-btn:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
 .nav-btn[data-subj="DSA"] { color: var(--accent-dsa); }
 .nav-btn[data-subj="AFD"] { color: var(--accent-afd); }
 .nav-btn[data-subj="FOML"] { color: var(--accent-foml); }
@@ -134,6 +190,18 @@ html, body { height: 100%; min-height: 100svh; background: #07070f; overflow: hi
   border-color: rgba(245,200,66,0.5);
   color: #f5c842;
   box-shadow: 0 0 12px rgba(245,200,66,0.15);
+}
+.nav-btn--download {
+  color: #93c5fd;
+  border-color: rgba(59,130,246,0.3);
+  background: rgba(59,130,246,0.09);
+  font-weight: 600;
+}
+.nav-btn--download:hover:not(:disabled) {
+  background: rgba(59,130,246,0.16);
+  border-color: rgba(96,165,250,0.55);
+  color: #dbeafe;
+  box-shadow: 0 0 12px rgba(59,130,246,0.18);
 }
 
 .page-info { font-size: 0.78rem; color: var(--ink-dim); }
@@ -1315,6 +1383,91 @@ canvas {
   }
   .code-runner__btns {
     margin-left: auto;
+  }
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  html,
+  body,
+  #root,
+  .print-route {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    background: #ffffff;
+    position: static !important;
+    inset: auto !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .print-route,
+  .print-route * {
+    visibility: visible;
+  }
+
+  .print-route {
+    display: block;
+    position: static;
+    width: 100%;
+    overflow: visible;
+    background: #ffffff;
+  }
+
+  .print-route__bar {
+    display: none !important;
+  }
+
+  .print-route__pages {
+    display: block;
+    padding: 0;
+    margin: 0;
+  }
+
+  .export-entry {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    break-inside: auto;
+    page-break-inside: auto;
+    break-before: auto;
+    break-after: auto;
+    page-break-before: auto;
+    page-break-after: auto;
+  }
+
+  .export-entry .book-page {
+    width: 100% !important;
+    min-height: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    position: relative;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .export-entry .page-inner {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .export-entry .page-number,
+  .export-entry .cover-mobile-quiz-btn,
+  .export-entry .ui-toggle,
+  .export-entry .ui-overlay,
+  .export-entry .flip-zone,
+  .export-entry .mcq-panel {
+    display: none !important;
   }
 }
 
