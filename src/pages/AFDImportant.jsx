@@ -187,11 +187,28 @@ function QuizView({
   const attempted = answers.length;
   const remaining = questions.length - attempted;
   const accuracy = attempted ? Math.round((correctSoFar / attempted) * 100) : 0;
+  const isTheoryQuestion = question.type === "theory";
+  const theorySelections =
+    isTheoryQuestion && selected && typeof selected === "object" ? selected : {};
+  const theoryComplete =
+    isTheoryQuestion &&
+    question.blanks.every((_, blankIdx) =>
+      Object.prototype.hasOwnProperty.call(theorySelections, blankIdx)
+    );
+  const canProceed = isTheoryQuestion ? theoryComplete : locked;
 
   const getOptionClass = (optionIndex) => {
     if (!locked) return "mcq-option";
     if (optionIndex === question.ans) return "mcq-option mcq-option--locked mcq-option--correct";
     if (optionIndex === selected) return "mcq-option mcq-option--locked mcq-option--wrong";
+    return "mcq-option mcq-option--locked mcq-option--dimmed";
+  };
+
+  const getTheoryOptionClass = (blankIndex, optionIndex, blank) => {
+    const chosen = theorySelections[blankIndex];
+    if (chosen === undefined) return "mcq-option";
+    if (optionIndex === blank.ans) return "mcq-option mcq-option--locked mcq-option--correct";
+    if (chosen === optionIndex) return "mcq-option mcq-option--locked mcq-option--wrong";
     return "mcq-option mcq-option--locked mcq-option--dimmed";
   };
 
@@ -284,34 +301,103 @@ function QuizView({
                   borderColor: "rgba(124,58,237,0.32)",
                 }}
               >
-                {question.type === "fib" ? "Keyword" : "MCQ"}
+                {isTheoryQuestion ? "Theory FIB" : "MCQ"}
               </span>
             </div>
             <p className="mcq-question-text">{question.q}</p>
           </motion.div>
 
-          <div className="mcq-options">
-            {question.opts.map((option, index) => (
-              <button
-                key={option}
-                className={getOptionClass(index)}
-                onClick={() => onSelect(index)}
-                disabled={locked}
+          {isTheoryQuestion ? (
+            <div style={{ display: "grid", gap: "1rem" }}>
+              <div
+                style={{
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  borderRadius: "18px",
+                  background: "rgba(255,255,255,0.035)",
+                  padding: "1rem",
+                }}
               >
-                <span className="mcq-option__letter">{LETTERS[index]}</span>
-                <span className="mcq-option__text">{option}</span>
-              </button>
-            ))}
-          </div>
+                <span
+                  style={{
+                    display: "block",
+                    color: "rgba(232,228,240,0.52)",
+                    fontSize: "0.72rem",
+                    fontWeight: 800,
+                    letterSpacing: "0.12em",
+                    marginBottom: "0.75rem",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Answer Pointers - fill each blank
+                </span>
+                <div style={{ display: "grid", gap: "1rem" }}>
+                  {question.blanks.map((blank, blankIndex) => (
+                    <section
+                      key={`${question.id}-blank-${blankIndex}`}
+                      style={{
+                        borderTop: blankIndex ? "1px solid rgba(255,255,255,0.08)" : "none",
+                        paddingTop: blankIndex ? "1rem" : 0,
+                      }}
+                    >
+                      <p
+                        style={{
+                          color: "#f7f3ff",
+                          fontFamily: "Georgia, serif",
+                          fontSize: "1.22rem",
+                          fontWeight: 700,
+                          lineHeight: 1.55,
+                          marginBottom: "0.7rem",
+                        }}
+                      >
+                        {blankIndex + 1}. {blank.text.split("___")[0]}
+                        <span style={{ color: AFD_COLOR, textDecoration: "underline" }}>___</span>
+                        {blank.text.split("___")[1]}
+                      </p>
+                      <div className="mcq-options" style={{ gap: "0.55rem" }}>
+                        {blank.opts.map((option, optionIndex) => (
+                          <button
+                            key={`${blank.text}-${option}`}
+                            className={getTheoryOptionClass(blankIndex, optionIndex, blank)}
+                            onClick={() => onSelect(blankIndex, optionIndex)}
+                            disabled={theorySelections[blankIndex] !== undefined}
+                            style={{ minHeight: "54px" }}
+                          >
+                            <span className="mcq-option__letter">{LETTERS[optionIndex]}</span>
+                            <span className="mcq-option__text">{option}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </section>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="mcq-options">
+              {question.opts.map((option, index) => (
+                <button
+                  key={option}
+                  className={getOptionClass(index)}
+                  onClick={() => onSelect(index)}
+                  disabled={locked}
+                >
+                  <span className="mcq-option__letter">{LETTERS[index]}</span>
+                  <span className="mcq-option__text">{option}</span>
+                </button>
+              ))}
+            </div>
+          )}
 
-          {locked ? (
+          {canProceed ? (
             <div className="mcq-explanation">
-              <strong>{selected === question.ans ? "Correct. " : "Not quite. "}</strong>
+              <strong>
+                {answers[answers.length - 1]?.wasCorrect ? "Correct. " : "Not quite. "}
+              </strong>
               {question.exp}
             </div>
           ) : null}
 
-          <button className="mcq-next-btn" disabled={!locked} onClick={onNext}>
+          <button className="mcq-next-btn" disabled={!canProceed} onClick={onNext}>
             {quizIdx === questions.length - 1 ? "See Results" : "Next"} <span className="arrow">→</span>
           </button>
         </div>
@@ -361,7 +447,7 @@ function QuizView({
         >
           {showRef ? "Close" : "Notes"}
         </button>
-        <button className="mcq-mobile-actionbar__primary" onClick={onNext} disabled={!locked}>
+        <button className="mcq-mobile-actionbar__primary" onClick={onNext} disabled={!canProceed}>
           {quizIdx === questions.length - 1 ? "See Results" : "Next Question"}
         </button>
       </div>
@@ -587,9 +673,34 @@ export default function AFDImportant() {
     setView("quiz");
   }
 
-  function chooseOption(index) {
-    if (locked || !questions[quizIdx]) return;
+  function chooseOption(index, optionIndex = null) {
+    if (!questions[quizIdx]) return;
     const question = questions[quizIdx];
+    if (locked && question.type !== "theory") return;
+
+    if (question.type === "theory") {
+      const blankIndex = index;
+      const currentSelection = selected && typeof selected === "object" ? selected : {};
+      if (Object.prototype.hasOwnProperty.call(currentSelection, blankIndex)) return;
+      const nextSelection = {
+        ...currentSelection,
+        [blankIndex]: optionIndex,
+      };
+      setSelected(nextSelection);
+
+      const allAnswered = question.blanks.every((_, blankIdx) =>
+        Object.prototype.hasOwnProperty.call(nextSelection, blankIdx)
+      );
+      if (!allAnswered) return;
+
+      const wasCorrect = question.blanks.every(
+        (blank, blankIdx) => nextSelection[blankIdx] === blank.ans
+      );
+      setLocked(true);
+      setAnswers((current) => [...current, { qId: question.id, topic: question.topic, wasCorrect }]);
+      return;
+    }
+
     const wasCorrect = index === question.ans;
     setSelected(index);
     setLocked(true);

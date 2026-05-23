@@ -194,6 +194,327 @@ const banks = {
   ],
 };
 
+const theoryBanks = {
+  1: [
+    t(
+      "Event Loop Order",
+      "Analyze the execution order of synchronous code, Microtasks (Promises), and Macrotasks (setTimeout). Why does the Event Loop prioritize the Microtask queue?",
+      [
+        p("JavaScript first completes all ___ code already present on the call stack.", ["synchronous", "deferred", "hashed", "routed"], 0),
+        p("Promise callbacks are placed in the ___ queue, which gets priority after the stack is empty.", ["callback", "microtask", "DOM", "HTTP"], 1),
+        p("setTimeout callbacks wait in the ___ queue and run only after microtasks are drained.", ["macrotask", "schema", "state", "payload"], 0),
+        p("This priority makes Promise-based updates run before timer callbacks, even when the timer delay is ___.", ["0 ms", "1 hour", "undefined", "encrypted"], 0),
+      ]
+    ),
+    t(
+      "Promise Inside setTimeout",
+      "Predict the output order of a script that contains a Promise inside a setTimeout. Justify your answer using the Callback Queue logic.",
+      [
+        p("The outer setTimeout callback first enters the ___ queue.", ["microtask", "callback", "schema", "props"], 1),
+        p("When the timer callback starts running, any Promise inside it schedules a new ___.", ["microtask", "route param", "class method", "salt"], 0),
+        p("That Promise callback runs after the current timer callback finishes but before the next ___ task.", ["macrotask", "JSX", "model", "state variable"], 0),
+      ]
+    ),
+  ],
+  2: [
+    t(
+      "Declarative React",
+      "Explain the 'Declarative' nature of React. How does it simplify the developer's job compared to Imperative DOM manipulation?",
+      [
+        p("React is called ___ because developers describe the desired UI result.", ["declarative", "blocking", "relational", "synchronous"], 0),
+        p("In imperative DOM code, the developer manually writes ___ updates step by step.", ["DOM", "JWT", "bcrypt", "MongoDB"], 0),
+        p("React compares UI descriptions and updates the real DOM through ___.", ["ReactDOM", "Express", "Mongoose", "npm"], 0),
+      ]
+    ),
+    t(
+      "Virtual DOM Diffing",
+      "Describe the lifecycle of a UI update in React. How does the Virtual DOM 'Diffing' algorithm prevent unnecessary re-renders of the entire page?",
+      [
+        p("A state or prop change creates a new ___ DOM tree.", ["Virtual", "SQL", "HTTP", "bcrypt"], 0),
+        p("React ___ compares the old tree with the new tree to find changes.", ["diffing", "hashing", "routing", "salting"], 0),
+        p("Only the changed parts are committed to the ___ DOM.", ["real", "NoSQL", "payload", "callback"], 0),
+      ]
+    ),
+  ],
+  3: [
+    t(
+      "Props vs State",
+      "Compare 'Props' and 'State' in terms of ownership. Which one is considered 'read-only' from a component's perspective and why?",
+      [
+        p("Props are owned by the ___ component that passes them down.", ["parent", "database", "browser", "router"], 0),
+        p("From the child component's perspective, props are ___.", ["read-only", "encrypted", "global", "mutable directly"], 0),
+        p("State is local memory owned and updated by the ___ itself.", ["component", "CSS file", "JWT", "server only"], 0),
+      ]
+    ),
+    t(
+      "Unidirectional Data Flow",
+      "Explain the significance of 'Unidirectional Data Flow' in React. How does this pattern help in tracking data changes and debugging complex apps?",
+      [
+        p("In React, data commonly flows from parent to child through ___.", ["props", "bcrypt", "headers", "collections"], 0),
+        p("Children request changes by calling ___ functions passed from the parent.", ["callback", "schema", "salt", "status"], 0),
+        p("This one-way flow makes bugs easier to trace because the data owner is ___.", ["clear", "hidden", "random", "duplicated"], 0),
+      ]
+    ),
+    t(
+      "Conditional Rendering Techniques",
+      "Discuss three different techniques for Conditional Rendering in JSX. Provide a conceptual example of when to use a Ternary Operator versus the '&&' operator.",
+      [
+        p("Use a ___ operator when choosing between two UI branches.", ["ternary", "spread", "delete", "hash"], 0),
+        p("Use logical ___ when showing something or nothing.", ["&&", "||", "==", "++"], 0),
+        p("Returning ___ is a valid way to render nothing from a component.", ["null", "404", "bcrypt", "schema"], 0),
+      ]
+    ),
+    t(
+      "Prop Drilling",
+      "What is 'Prop Drilling,' and what are its disadvantages in large-scale applications? Suggest one standard React feature used to bypass this problem.",
+      [
+        p("Prop drilling means passing props through many ___ components.", ["intermediate", "database", "server", "hashed"], 0),
+        p("It hurts maintainability because components receive props they do not actually ___.", ["use", "encrypt", "route", "compile"], 0),
+        p("A standard React solution for shared data is the ___ API.", ["Context", "Fetch", "BSON", "HTTP"], 0),
+      ]
+    ),
+  ],
+  4: [
+    t(
+      "Rules of Hooks",
+      "List the two strict rules for using React Hooks. Why does React rely on these rules to maintain the state of functional components correctly?",
+      [
+        p("Hooks must be called at the ___ level of a React function.", ["top", "bottom", "database", "route"], 0),
+        p("Hooks should not be called inside loops, conditions, or nested ___.", ["functions", "collections", "headers", "schemas"], 0),
+        p("React depends on the same hook call ___ on every render.", ["order", "URL", "password", "status"], 0),
+      ]
+    ),
+    t(
+      "useEffect Cleanup",
+      "Explain the purpose of the 'Cleanup Function' within the useEffect hook. Describe a specific scenario, like interval, where omitting it causes issues.",
+      [
+        p("A useEffect cleanup function runs before the effect re-runs and when the component ___.", ["unmounts", "hashes", "routes", "submits"], 0),
+        p("For intervals, cleanup should call ___ to stop repeated execution.", ["clearInterval", "setState", "useParams", "jwt.sign"], 0),
+        p("Without cleanup, timers or subscriptions can cause memory ___.", ["leaks", "indexes", "schemas", "payloads"], 0),
+      ]
+    ),
+  ],
+  5: [
+    t(
+      "Controlled vs Uncontrolled Inputs",
+      "Contrast 'Controlled' vs. 'Uncontrolled' input fields. In what scenario would using a 'ref' (Uncontrolled) be more beneficial than 'useState' (Controlled)?",
+      [
+        p("A controlled input stores its value in React ___.", ["state", "BSON", "headers", "routes"], 0),
+        p("An uncontrolled input keeps its current value mainly in the ___.", ["DOM", "JWT", "server", "package.json"], 0),
+        p("useRef is useful when you only need to read the value on ___ instead of every keystroke.", ["submit", "mount", "hash", "route"], 0),
+      ]
+    ),
+    t(
+      "Search Fetch with useEffect",
+      "If a user is typing into a search bar, how can you use local state and a side-effect (useEffect) to fetch data from an API only when the input changes?",
+      [
+        p("The search text should be stored in local component ___.", ["state", "JWT", "CSS", "schema"], 0),
+        p("The API call belongs inside ___ because it is a side effect.", ["useEffect", "useRef", "useParams", "Link"], 0),
+        p("The search value should be placed in the dependency ___ so the effect re-runs when it changes.", ["array", "payload", "collection", "salt"], 0),
+      ]
+    ),
+  ],
+  8: [
+    t(
+      "req-res-next Cycle",
+      "Explain the 'req-res-next' cycle. What specific role does the 'next()' function play in a multi-layered middleware application?",
+      [
+        p("Express middleware receives ___, res, and next.", ["req", "schema", "props", "token"], 0),
+        p("The req object contains request data like params, query, body, and ___.", ["headers", "JSX", "indexes", "salt"], 0),
+        p("Calling ___ passes control to the next middleware in order.", ["next()", "render()", "map()", "hash()"], 0),
+      ]
+    ),
+    t(
+      "Error Middleware",
+      "How does 'Error-handling middleware' differ in signature from regular middleware? Explain why its placement at the end of the file is critical.",
+      [
+        p("Error-handling middleware has four parameters: err, req, res, ___.", ["next", "props", "model", "state"], 0),
+        p("Its first parameter is ___, which regular middleware does not have.", ["err", "id", "key", "role"], 0),
+        p("It is placed after routes so it can catch errors passed using ___.", ["next(err)", "useState()", "find()", "Link"], 0),
+      ]
+    ),
+    t(
+      "Express Server Setup",
+      "Describe the steps to initialize an Express server. Include the middleware required to ensure the server can process JSON data sent in a POST request.",
+      [
+        p("An Express app is created by calling ___.", ["express()", "ReactDOM()", "mongoose.Schema()", "bcrypt()"], 0),
+        p("To read JSON request bodies, register ___ middleware.", ["express.json()", "express.staticOnly()", "jwt.decode()", "React.memo()"], 0),
+        p("The server starts accepting requests using ___.", ["app.listen()", "app.mount()", "app.hash()", "app.compile()"], 0),
+      ]
+    ),
+    t(
+      "Application vs Router Middleware",
+      "Differentiate between 'Application-level' middleware and 'Router-level' middleware in Express. When should you choose one over the other?",
+      [
+        p("Application-level middleware is attached directly with ___.", ["app.use()", "router.find()", "useState()", "jwt.sign()"], 0),
+        p("Router-level middleware is attached to an Express ___.", ["Router", "Context", "Schema only", "Virtual DOM"], 0),
+        p("Choose router-level middleware when logic should apply only to a specific group of ___.", ["routes", "CSS files", "passwords", "components"], 0),
+      ]
+    ),
+    t(
+      "MVC Express Mongoose",
+      "Describe the MVC architecture in the context of a Node/Express/Mongoose stack. Assign 'Mongoose Schema', 'Routes/Controllers', and 'JSON Response' to their respective MVC roles.",
+      [
+        p("In this stack, a Mongoose Schema/Model represents the ___.", ["Model", "View", "Controller", "Router only"], 0),
+        p("Routes and controllers handle request logic, so they are the ___.", ["Controller", "Payload", "Style", "Salt"], 0),
+        p("For an API, the JSON response acts like the ___ layer returned to the client.", ["View", "Hash", "Package", "Index"], 0),
+      ]
+    ),
+    t(
+      "Middleware Concept",
+      "What is middleware in Express.js? Also, write an example to initialize an Express server and create basic GET and POST routes, including all required middleware to handle requests.",
+      [
+        p("Middleware functions run between the incoming request and outgoing ___.", ["response", "component", "schema", "promise"], 0),
+        p("A basic JSON API should call app.use(___) before POST routes.", ["express.json()", "ReactDOM.render()", "bcrypt.compare()", "useContext()"], 0),
+        p("GET reads resources, while POST usually ___ a new resource.", ["creates", "deletes only", "styles", "encrypts JSX"], 0),
+      ]
+    ),
+  ],
+  10: [
+    t(
+      "JWT Auth Flow",
+      "Outline the complete journey of a JWT from a user's login request to their access of a protected route. How does the server verify the token without a session database?",
+      [
+        p("After login succeeds, the server creates and sends a signed ___.", ["JWT", "CSS file", "component", "collection"], 0),
+        p("The client sends the token back in the Authorization header using the ___ scheme.", ["Bearer", "Basic CSS", "Router", "Schema"], 0),
+        p("The server verifies the token using its secret and does not need a session ___.", ["database", "stylesheet", "DOM", "Vite"], 0),
+      ]
+    ),
+    t(
+      "JWT Parts and Signature",
+      "Explain the three parts of a JSON Web Token. Why is the 'Signature' crucial for ensuring that the client hasn't tampered with the 'Payload'?",
+      [
+        p("A JWT is commonly written as header.payload.___.", ["signature", "schema", "component", "route"], 0),
+        p("The payload stores claims such as user id, role, and ___.", ["expiry", "CSS", "JSX tag", "collection name only"], 0),
+        p("The signature proves the payload was not ___ by the client.", ["tampered", "rendered", "mapped", "mounted"], 0),
+      ]
+    ),
+  ],
+};
+
+const followUpBanks = {
+  1: [
+    q("What happens when a function is called in JavaScript?", ["A new function execution context is pushed onto the call stack", "The global execution context is deleted", "The microtask queue runs immediately", "The browser reloads"], 0, "Every function call creates a function execution context and pushes it onto the call stack."),
+    q("What is the initial value of a var variable during memory creation?", ["null", "undefined", "0", "It is not allocated"], 1, "var declarations are hoisted and initialized as undefined."),
+    q("Which order correctly describes stack behavior?", ["First In First Out", "Last In First Out", "Random access", "Priority by variable name"], 1, "The call stack follows LIFO: the last function pushed finishes first."),
+    q("Why does missing a recursion base case become dangerous?", ["It keeps adding stack frames until overflow", "It converts the function to async", "It clears all variables", "It automatically returns null"], 0, "Without a base case, recursive calls continue and fill the call stack."),
+    q("If console.log runs before setTimeout, why does it appear first?", ["Synchronous code runs before queued callbacks", "setTimeout deletes console.log", "Timers always run first", "Promises block console.log"], 0, "Synchronous code on the call stack completes before queued async callbacks."),
+    q("Which callback runs first after the call stack becomes empty?", ["setTimeout callback", "Promise .then callback", "DOM repaint only", "HTTP response always"], 1, "Microtasks such as Promise callbacks run before macrotasks like setTimeout."),
+    q("Which Promise state means the operation completed successfully?", ["pending", "fulfilled", "rejected", "blocked"], 1, "Fulfilled means the Promise resolved successfully."),
+    q("Where should await be used?", ["Inside an async function", "Only inside CSS", "Only outside functions", "Inside JSON files"], 0, "await is valid inside async functions and pauses that function until the Promise settles."),
+    q("Which expression is explicit coercion?", ["Number('42')", "'5' + 1", "if ('hello')", "null == undefined"], 0, "Number('42') manually converts a string to a number."),
+    q("Which example best shows throttling?", ["Run search only after typing stops", "Run scroll handler at most once every 300ms", "Convert string to number", "Nest callbacks deeply"], 1, "Throttling limits how often a function can run during repeated events."),
+  ],
+  2: [
+    q("Why is React useful in UI development?", ["It updates UI from state using components", "It replaces HTTP completely", "It stores passwords securely", "It creates MongoDB indexes"], 0, "React organizes UI into components and updates views when state changes."),
+    q("What makes React declarative?", ["You describe the desired UI, not every DOM step", "You manually call appendChild everywhere", "You write SQL queries in JSX", "You disable state updates"], 0, "Declarative React describes what the UI should look like for a given state."),
+    q("What is a key benefit of SPA routing?", ["Changing views without full page reload", "Removing JavaScript from the browser", "Storing all data in CSS", "Forcing every click to hit the server"], 0, "SPAs keep one page shell and swap views on the client."),
+    q("Which JSX rule is correct?", ["Return one parent wrapper or fragment", "Use class instead of className always", "Write if statements directly inside JSX output", "Use for instead of htmlFor in labels"], 0, "JSX expressions must return a single parent node or fragment."),
+    q("What does ReactDOM mainly do?", ["Connects React elements to the real DOM", "Hashes user passwords", "Creates Express routes", "Stores documents in MongoDB"], 0, "ReactDOM takes React's UI description and updates the browser DOM."),
+    q("Why is Virtual DOM cheaper to compare than direct DOM work?", ["It is a lightweight object representation", "It is a second browser tab", "It is stored in MongoDB", "It uses bcrypt"], 0, "Virtual DOM trees are JavaScript objects that React can compare efficiently."),
+    q("During reconciliation, what should React avoid?", ["Updating DOM nodes that did not change", "Using props", "Rendering components", "Using JSX"], 0, "Reconciliation tries to apply only necessary DOM updates."),
+    q("What is component composition?", ["Building bigger UI by combining smaller components", "Converting strings to numbers", "Writing middleware chains", "Creating JWT signatures"], 0, "Composition means nesting and combining reusable components."),
+    q("When is children most useful?", ["Creating reusable wrapper/layout components", "Reading route params", "Parsing JSON body", "Comparing passwords"], 0, "children lets a wrapper receive whatever JSX is placed between its tags."),
+    q("Which command usually starts a Vite dev server?", ["npm run dev", "npm run hash", "node build.css", "mongo start react"], 0, "Vite projects commonly use npm run dev for local development."),
+  ],
+  3: [
+    q("Which statement about props is correct?", ["Props are passed from parent to child", "Props must be mutated by the child", "Props are stored only in MongoDB", "Props replace event handlers"], 0, "Props are inputs passed down from parent components."),
+    q("How should a child ask the parent to update data?", ["Call a callback prop from the parent", "Directly mutate props", "Edit the Virtual DOM manually", "Change package.json"], 0, "Children communicate upward by invoking callbacks provided by the parent."),
+    q("When should you use && rendering?", ["Show a component only when a condition is true", "Choose between exactly two branches", "Create an Express server", "Read a route parameter"], 0, "&& is best for show-or-nothing conditional UI."),
+    q("When should a ternary be preferred in JSX?", ["When rendering one of two alternatives", "When rendering nothing only", "When creating passwords", "When defining MongoDB schemas"], 0, "Ternary handles either-or UI branches clearly."),
+    q("Why is .map() used for lists in React?", ["It returns a new array of JSX elements", "It mutates state directly", "It sends HTTP requests", "It hashes passwords"], 0, "map transforms data arrays into renderable JSX arrays."),
+    q("What is a common problem with index as key?", ["Wrong UI state after reordering list items", "It prevents all rendering", "It breaks npm install", "It disables props"], 0, "Index keys are unstable when items are inserted, removed, or reordered."),
+    q("What is the main pain of prop drilling?", ["Intermediate components receive props only to forward them", "The browser cannot run JavaScript", "The server cannot send JSON", "Passwords become plain text"], 0, "Prop drilling makes deep component trees harder to maintain."),
+    q("Which feature can share theme/user data without passing props at every level?", ["Context API", "useParams", "express.json", "bcrypt"], 0, "Context shares values across a component subtree."),
+    q("Which class lifecycle runs after updates?", ["componentDidUpdate", "componentDidMount", "componentWillUnmount", "constructor only"], 0, "componentDidUpdate runs after props or state updates render."),
+    q("Which lifecycle is best for clearing subscriptions in a class component?", ["componentWillUnmount", "componentDidMount", "render", "shouldUseRouter"], 0, "componentWillUnmount is used for cleanup before removal."),
+  ],
+  4: [
+    q("Why must state be updated with a setter?", ["React tracks setter calls and re-renders", "Setters store data in CSS", "Setters create JWT tokens", "Setters bypass React"], 0, "React schedules re-rendering when state setters are called."),
+    q("What happens if setCount(count + 1) is called twice quickly in the same handler?", ["It may use stale count; functional update is safer", "It always adds 100", "It deletes state", "It turns count into a string"], 0, "Functional updates use the latest previous state."),
+    q("Which dependency array makes an effect run once after mount?", ["[]", "[everyRender]", "No dependency array", "[null, null, null]"], 0, "An empty dependency array runs the effect after initial mount."),
+    q("What can cause an infinite effect loop?", ["Effect sets state that is also a changing dependency", "Using JSX", "Importing React", "Writing a component name in PascalCase"], 0, "Updating a dependency inside the effect can trigger repeated re-renders."),
+    q("Which side effect belongs in useEffect?", ["Fetching data from an API", "Declaring JSX only", "Returning component markup", "Choosing a file name"], 0, "API calls are side effects because they interact with external systems."),
+    q("What is a cleanup function allowed to return from useEffect?", ["A function", "A JSX element", "A route path", "A MongoDB collection"], 0, "useEffect may return a cleanup function."),
+    q("Why can hooks not be inside if statements?", ["React depends on the same hook order each render", "JavaScript forbids functions in if", "It breaks CSS only", "It disables npm"], 0, "Conditional hooks change call order and break state matching."),
+    q("Where can a custom hook be called?", ["Inside a React component or another hook", "Inside package.json", "Inside CSS", "Inside MongoDB Compass only"], 0, "Custom hooks follow the same Rules of Hooks."),
+    q("What does React.memo help avoid?", ["Re-rendering when props are unchanged", "All HTTP errors", "All state updates", "Password hashing"], 0, "React.memo can skip renders when props are the same."),
+    q("Which value persists between renders without causing re-render when changed?", ["useRef().current", "local variable only", "JSX text", "route string"], 0, "Refs persist and changing ref.current does not trigger a render."),
+  ],
+  5: [
+    q("Why does React use camelCase event names?", ["They map to React's event prop convention", "HTML forbids lowercase", "MongoDB requires it", "JWT uses it"], 0, "React event props are camelCase, such as onClick and onChange."),
+    q("What is wrong with onClick={handleClick()} for a normal click handler?", ["It calls the function during render", "It never calls the function", "It converts it to CSS", "It hashes the handler"], 0, "Use onClick={handleClick} to pass the function reference."),
+    q("In a controlled input, what should the value prop come from?", ["React state", "Random DOM lookup", "JWT signature", "package-lock.json"], 0, "Controlled inputs use React state as the source of truth."),
+    q("When is useRef a good form choice?", ["Reading a value only on submit", "Validating each keystroke live", "Rendering route links", "Creating server middleware"], 0, "Refs suit uncontrolled fields where every keystroke need not update state."),
+    q("Why use preventDefault in submit handlers?", ["To stop browser reload and handle submit in React", "To prevent state from existing", "To disable all inputs", "To parse JSON automatically"], 0, "preventDefault keeps SPA behavior during form submission."),
+    q("What does fetch return first?", ["A Response object", "Already parsed JSX", "A Mongoose model", "A bcrypt hash"], 0, "fetch resolves to a Response; call response.json() to parse JSON."),
+    q("What is a common fetch error-handling step?", ["Check response.ok before parsing success data", "Always ignore status codes", "Use Link instead of fetch", "Call setTimeout only"], 0, "response.ok helps detect HTTP error statuses."),
+    q("Which Axios feature is useful for attaching auth headers globally?", ["Interceptors", "Fragments", "Keys", "Reducers only"], 0, "Axios interceptors can modify requests/responses globally."),
+    q("Why keep error state during API calls?", ["To show a useful failure message", "To remove all loading UI", "To change database type", "To stop routing"], 0, "Error state helps users understand failed requests."),
+    q("Which state pair is common for API UI?", ["loading and error", "salt and hash only", "route and schema only", "CSS and BSON"], 0, "API UIs usually track loading, data, and error states."),
+  ],
+  6: [
+    q("Where should a Context Provider be placed?", ["Above components that need the value", "Only inside an option tag", "After every return statement", "Inside package.json"], 0, "Consumers can read only from Providers above them in the tree."),
+    q("What happens if useContext is used without a matching Provider?", ["It receives the context default value", "It always crashes the app", "It creates a provider automatically", "It reads MongoDB"], 0, "Without a Provider, React uses the default context value."),
+    q("Which prop supplies data from a Provider?", ["value", "data", "contextData", "payloadOnly"], 0, "Context Provider uses the value prop."),
+    q("What does BrowserRouter use for clean browser URLs?", ["History API", "bcrypt", "Mongoose", "CSS variables"], 0, "BrowserRouter uses the browser history API."),
+    q("Why prefer Link over a normal a tag inside SPA navigation?", ["It avoids full page reload", "It hashes passwords", "It creates a database", "It parses request body"], 0, "Link changes routes client-side."),
+    q("Which hook reads /products/:id in React Router?", ["useParams", "useState", "useRef", "useEffect only"], 0, "useParams returns dynamic route parameters."),
+    q("What is a nested route layout useful for?", ["Sharing UI while child routes change", "Deleting all routes", "Replacing components with CSS", "Hashing tokens"], 0, "Nested routes let parent layouts render child content via Outlet."),
+    q("Where does Outlet render?", ["Where the matched child route should appear", "Inside the database", "Inside the HTTP header", "Only outside BrowserRouter"], 0, "Outlet is a placeholder for child route elements."),
+    q("When is useNavigate useful?", ["Redirecting after login or form submit", "Styling active links only", "Parsing JSON body", "Creating bcrypt salt"], 0, "useNavigate performs navigation from code."),
+    q("What does NavLink provide that Link does not emphasize?", ["Active route styling", "Password comparison", "MongoDB validation", "State setter batching"], 0, "NavLink can style links based on active route state."),
+  ],
+  7: [
+    q("What does the client usually send to an API?", ["HTTP request", "React component object", "CSS animation only", "MongoDB index directly"], 0, "Clients communicate with servers through HTTP requests."),
+    q("What does the server usually send back?", ["HTTP response", "JSX source file only", "npm cache", "Vite config only"], 0, "Servers process requests and return responses."),
+    q("Why can Node run JavaScript outside the browser?", ["It provides a runtime built on V8", "It uses ReactDOM", "It uses CSS modules", "It requires MongoDB"], 0, "Node is a JavaScript runtime powered by V8."),
+    q("Which task is I/O-bound?", ["Reading a file from disk", "Adding two numbers", "Declaring a variable", "Writing JSX"], 0, "File access is input/output work and may be handled asynchronously."),
+    q("Why is non-blocking I/O important?", ["The server can keep handling other requests while waiting", "It makes all code synchronous", "It removes the event loop", "It prevents HTTP"], 0, "Non-blocking I/O improves concurrency."),
+    q("Which fs method style is usually better for servers?", ["Asynchronous fs methods", "Synchronous blocking methods everywhere", "CSS-only methods", "JWT methods"], 0, "Async file operations avoid blocking the event loop."),
+    q("What does http.createServer receive?", ["A request-response handler", "A React component", "A Mongo schema only", "A password salt"], 0, "Raw Node HTTP servers use a callback with req and res."),
+    q("What is node_modules?", ["Folder containing installed packages", "Main source file only", "Database backup", "Browser DOM tree"], 0, "Installed npm packages live in node_modules."),
+    q("What does npm install do?", ["Downloads dependencies listed for the project", "Runs React components", "Starts MongoDB Atlas", "Creates JWTs"], 0, "npm install installs dependencies."),
+    q("Which status code means successful creation?", ["201", "404", "500", "301"], 0, "201 Created is commonly used after successful POST creation."),
+  ],
+  8: [
+    q("Why use Express instead of raw http for most APIs?", ["Simpler routing and middleware", "It replaces JavaScript", "It stores all data automatically", "It removes status codes"], 0, "Express reduces boilerplate for routes, middleware, and responses."),
+    q("What must happen before app.listen in a typical API?", ["Register middleware/routes", "Delete package.json", "Unmount React", "Hash all CSS"], 0, "Middleware and routes are usually configured before starting the server."),
+    q("What happens if express.json() is missing for JSON POST body?", ["req.body may be undefined", "req.params stops working", "GET routes disappear", "React Router crashes"], 0, "express.json parses JSON bodies into req.body."),
+    q("Which Express object is used to send JSON?", ["res.json()", "req.json()", "next.json()", "app.body()"], 0, "res.json sends a JSON response."),
+    q("Which value comes from /users/42 when route is /users/:id?", ["req.params.id", "req.query.id", "req.body.id", "res.params.id"], 0, "Path parameters are stored in req.params."),
+    q("Which method should not change server data?", ["GET", "POST", "PUT", "DELETE"], 0, "GET should be safe/read-only."),
+    q("What causes an Express request to hang?", ["Middleware neither responds nor calls next()", "Calling res.json", "Using req.params", "Returning 404"], 0, "A middleware must end the response or pass control onward."),
+    q("What does next(err) do?", ["Skips to error-handling middleware", "Starts React Router", "Deletes req.body", "Creates a model"], 0, "Passing an error to next triggers error middleware."),
+    q("Why place error middleware after routes?", ["So it can catch errors from earlier route handlers", "So it runs before every import", "So it becomes a model", "So it blocks app.listen"], 0, "Error handlers should be registered after route definitions."),
+    q("In MVC, where should database query logic usually be called from?", ["Controller/service layer using models", "CSS file", "React key prop", "JWT header only"], 0, "Controllers coordinate requests and use models/services for data work."),
+  ],
+  9: [
+    q("How is a MongoDB document different from a SQL row?", ["It can contain nested objects and arrays", "It cannot store strings", "It only stores CSS", "It must be a React component"], 0, "MongoDB documents are flexible JSON-like structures."),
+    q("What is a collection most similar to in SQL terms?", ["Table", "Function", "Hook", "JWT"], 0, "A collection groups related documents, roughly like a table groups rows."),
+    q("Why does MongoDB use BSON internally?", ["Efficient binary storage with extra types", "To render JSX", "To hash passwords", "To route URLs"], 0, "BSON is binary JSON-like storage with more data type support."),
+    q("What is a common reason to use MongoDB Atlas?", ["Managed cloud database hosting", "Local React styling", "Browser event wrapping", "Vite compilation only"], 0, "Atlas hosts MongoDB clusters in the cloud."),
+    q("Why use Mongoose with Express?", ["To define schemas/models and simplify MongoDB operations", "To replace routing", "To compile JSX", "To create CSS"], 0, "Mongoose provides schemas, models, validation, and query helpers."),
+    q("Which Mongoose feature enforces required fields?", ["Schema validation", "React props", "Express Router", "JWT header"], 0, "Mongoose schemas can define required fields and validators."),
+    q("Which operation creates one document?", ["Model.create()", "Model.find()", "Model.listen()", "Model.render()"], 0, "Model.create inserts a new document."),
+    q("Which operation updates matching documents?", ["updateOne()", "findOnly()", "listen()", "jsx()"], 0, "updateOne changes a matching document."),
+    q("Which aggregation stage filters documents?", ["$match", "$groupOnly", "$render", "$route"], 0, "$match filters documents in an aggregation pipeline."),
+    q("What should you never hardcode in database code?", ["Connection string credentials", "Component names", "JSX fragments", "Route labels"], 0, "Database credentials belong in environment variables."),
+  ],
+  10: [
+    q("Which flow proves a user is who they claim to be?", ["Authentication", "Authorization", "Reconciliation", "Aggregation"], 0, "Authentication verifies identity."),
+    q("Which flow decides if a logged-in user may access admin pages?", ["Authorization", "Authentication", "Diffing", "Rendering"], 0, "Authorization checks permissions."),
+    q("Why is hashing one-way useful?", ["The original password cannot be recovered from the hash", "It lets React render faster", "It makes tokens never expire", "It removes salt"], 0, "Password hashes should not be reversible."),
+    q("What does bcrypt store inside its hash string?", ["Salt and cost information", "React props", "Route params", "CSS variables"], 0, "bcrypt hashes include salt and cost metadata."),
+    q("Why are salt rounds important?", ["They control hashing cost/slowness", "They define React route depth", "They parse JSON", "They create Mongo collections"], 0, "Higher salt rounds make brute-force attempts more expensive."),
+    q("During login, what should be compared?", ["Plain entered password against stored hash using bcrypt.compare", "Two plain passwords from database", "JWT header against CSS", "Route name against model"], 0, "bcrypt.compare safely checks the entered password against the stored hash."),
+    q("Where is a Bearer token commonly sent?", ["Authorization header", "CSS class", "JSX key", "package.json"], 0, "Clients commonly send JWTs as Authorization: Bearer <token>."),
+    q("What does the JWT payload usually contain?", ["Claims like user id and role", "The server secret", "The bcrypt salt only", "The entire database"], 0, "Payload contains claims, not the secret."),
+    q("What should protected-route middleware do after verifying a token?", ["Attach user info to req and call next()", "Delete all headers", "Render ReactDOM", "Run npm install"], 0, "Auth middleware often stores decoded user info on req for later handlers."),
+    q("Which role system best matches RBAC?", ["admin/editor/user permissions", "red/green/blue CSS", "pending/fulfilled/rejected", "GET/POST/PUT"], 0, "RBAC assigns permissions based on roles."),
+  ],
+};
+
 function c(topic, q, opts, ans, exp, keyword, points) {
   return {
     topic,
@@ -209,14 +530,29 @@ function c(topic, q, opts, ans, exp, keyword, points) {
   };
 }
 
+function t(topic, q, blanks) {
+  return { topic, q, blanks };
+}
+
+function p(text, opts, ans) {
+  return { text, opts, ans };
+}
+
+function q(text, opts, ans, exp) {
+  return { q: text, opts, ans, exp };
+}
+
 function buildVariants(moduleId, concept, index) {
   const base = {
     module: moduleId,
     topic: concept.topic,
     ref: concept.ref,
   };
-  const right = concept.opts[concept.ans];
   const wrong = concept.opts.filter((_, optionIndex) => optionIndex !== concept.ans);
+  const theorySet = theoryBanks[moduleId] || [];
+  const theory = theorySet[index % theorySet.length];
+  const followUp = followUpBanks[moduleId]?.[index];
+  const thirdId = `m${moduleId}-q${String(index * 3 + 3).padStart(2, "0")}`;
 
   return [
     {
@@ -232,25 +568,34 @@ function buildVariants(moduleId, concept, index) {
       ...base,
       id: `m${moduleId}-q${String(index * 3 + 2).padStart(2, "0")}`,
       type: "mcq",
-      q: `Which option is the correct exam statement about ${concept.topic}?`,
-      opts: [
-        `${right} is the correct idea.`,
-        `${wrong[0]} is the correct idea.`,
-        `${wrong[1]} is the correct idea.`,
-        `${wrong[2]} is the correct idea.`,
-      ],
-      ans: 0,
-      exp: concept.exp,
+      q: followUp?.q || `Which option correctly applies ${concept.topic} in an exam scenario?`,
+      opts: followUp?.opts || concept.opts,
+      ans: followUp?.ans ?? concept.ans,
+      exp: followUp?.exp || concept.exp,
     },
-    {
-      ...base,
-      id: `m${moduleId}-q${String(index * 3 + 3).padStart(2, "0")}`,
-      type: "fib",
-      q: `For ${concept.topic}, the missing keyword in the answer is ___.`,
-      opts: [concept.keyword, wrong[0], wrong[1], wrong[2]],
-      ans: 0,
-      exp: `${concept.keyword} is the key term to remember for this concept.`,
-    },
+    theory
+      ? {
+          ...base,
+          id: thirdId,
+          topic: theory.topic,
+          type: "theory",
+          q: theory.q,
+          blanks: theory.blanks,
+          exp: "These are the 3-marker answer keywords. Learn the pointer flow, not just the option letter.",
+          ref: {
+            title: `${theory.topic} - 3 Mark Answer Frame`,
+            points: theory.blanks.map((blank) => blank.text.replace("___", blank.opts[blank.ans])),
+          },
+        }
+      : {
+          ...base,
+          id: thirdId,
+          type: "mcq",
+          q: `The exam answer for ${concept.topic} should focus on ___ as the key idea.`,
+          opts: [concept.keyword, wrong[0], wrong[1], wrong[2]],
+          ans: 0,
+          exp: `${concept.keyword} is the key term to anchor this answer.`,
+        },
   ];
 }
 
