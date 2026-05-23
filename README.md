@@ -30,6 +30,10 @@ Rather than scrolls of dry text, **EndSem2Prep** presents revision material in a
   * **ER-to-Relational Diagrams:** Drag, inspect, and map entity-relationship models to raw SQL tables dynamically.
   * **Interactive Code Blocks:** Powered by `react-syntax-highlighter` to highlight production-ready syntax in Python, SQL, and JavaScript.
 * **Active Recall Exam Cards:** Reveal-on-click `details` blocks containing hot, high-probability exam questions and their ideal top-scoring answers.
+* **MemoryBox:** Spaced repetition-style memory aid components embedded within concept pages for reinforcing key definitions and formulas.
+* **MCQ Quiz System:** Subject-wise multiple-choice quiz mode with per-question scoring, immediate feedback, and a results summary screen.
+* **Real-time Leaderboard:** Powered by Convex — quiz scores are persisted to a cloud database and surfaced as a live, deduped top-30 leaderboard per subject.
+* **Print-Friendly Export:** A dedicated `/print` route renders all book pages in a clean, ink-optimized layout for PDF export or physical printing.
 * **Dark Mode Glassmorphism:** Curated, futuristic neon HSL-tailored color themes for each course, providing a dark visual aura that reduces late-night eye strain.
 
 ---

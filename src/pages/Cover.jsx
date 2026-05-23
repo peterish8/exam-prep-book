@@ -14,15 +14,12 @@ const Cover = forwardRef((props, ref) => {
 
   return (
     <div ref={ref} className="book-page cover-page">
-      <Link to="/quiz" className="cover-mobile-quiz-btn">
-        Quiz
-      </Link>
       <div className="cover-aura cover-aura--red" />
       <div className="cover-grain" />
       <div className="cover-content">
         <div className={`cover-shortcut-tip${showShortcutTip ? " is-visible" : ""}`}>
           <span className="cover-shortcut-tip__dot" aria-hidden="true" />
-          <span>Tap the DSA or Code button to open the code lab.</span>
+          <span>Tap AFD Exam for module-wise tests. Tap Code Lab for code explanations.</span>
         </div>
         <div className="cover-badge">2026 · Semester 2</div>
         <h1 className="cover-title">
@@ -32,21 +29,37 @@ const Cover = forwardRef((props, ref) => {
         </h1>
         <p className="cover-subtitle">Interactive Study Book</p>
         <div className="cover-subjects">
-          <div className="cover-subject-shortcuts">
-            <Link
-              to="/dsa-code?module=coding"
-              className="cover-subject-pill-link"
-              style={{ background: "#e63946" }}
-            >
-              DSA
-            </Link>
-            <Link to="/dsa-code?module=coding" className="cover-dsa-code-btn">
-              Code Lab
-            </Link>
-          </div>
-          <span style={{ background: "#2563eb" }}>AFD</span>
-          <span style={{ background: "#16a34a" }}>FOML</span>
-          <span style={{ background: "#7c3aed" }}>DBMS</span>
+          <Link
+            to="/quiz/dsa"
+            className="cover-subject-pill-link"
+            style={{ background: "#e63946" }}
+          >
+            DSA
+          </Link>
+          <Link to="/dsa-code?module=coding" className="cover-dsa-code-btn">
+            Code Lab
+          </Link>
+          <Link
+            to="/afd-important"
+            className="cover-subject-pill-link"
+            style={{ background: "#2563eb" }}
+          >
+            AFD Exam
+          </Link>
+          <Link
+            to="/quiz/foml"
+            className="cover-subject-pill-link"
+            style={{ background: "#16a34a" }}
+          >
+            FOML
+          </Link>
+          <Link
+            to="/quiz/dbms"
+            className="cover-subject-pill-link"
+            style={{ background: "#7c3aed" }}
+          >
+            DBMS
+          </Link>
         </div>
         <p className="cover-hint">← → to flip · click index to jump</p>
         <a

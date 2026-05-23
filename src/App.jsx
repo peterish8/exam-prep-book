@@ -63,6 +63,9 @@ export default function App() {
             <button className="nav-btn nav-btn--quiz" onClick={() => { navigate("/quiz"); setShowUI(false); }}>
               Quiz ✦
             </button>
+            <button className="nav-btn nav-btn--important" onClick={() => { navigate("/afd-important"); setShowUI(false); }}>
+              AFD Important
+            </button>
             <button className="nav-btn nav-btn--download" onClick={handleDownloadPdf}>
               Download PDF
             </button>

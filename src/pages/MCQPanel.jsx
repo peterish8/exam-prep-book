@@ -41,6 +41,9 @@ export default function MCQPanel({ visible }) {
         </div>
 
         <div className="mcq-panel__actions">
+          <Link to="/afd-important" className="mcq-panel__cta">
+            AFD Important <span className="arrow">-&gt;</span>
+          </Link>
           <Link to="/quiz" className="mcq-panel__cta">
             Start Quiz <span className="arrow">→</span>
           </Link>

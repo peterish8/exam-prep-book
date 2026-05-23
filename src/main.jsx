@@ -6,6 +6,7 @@ import QuizRoot from "./pages/quiz/QuizRoot.jsx";
 import Leaderboard from "./pages/Leaderboard.jsx";
 import PrintBook from "./pages/PrintBook.jsx";
 import DSACodeLab from "./pages/DSACodeLab.jsx";
+import AFDImportant from "./pages/AFDImportant.jsx";
 
 const convex = new ConvexReactClient(
   import.meta.env.VITE_CONVEX_URL || "https://placeholder.convex.cloud"
@@ -16,6 +17,7 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/afd-important" element={<AFDImportant />} />
         <Route path="/dsa-code" element={<DSACodeLab />} />
         <Route path="/print" element={<PrintBook />} />
         <Route path="/quiz/*" element={<QuizRoot />} />
