@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/readme/banner.png" alt="exam-prep-book banner" width="100%"/>
+</p>
+
 # 📖 EndSem2Prep — Interactive Semester 2 Study Book
 
 [![Vercel Deployment](https://img.shields.io/badge/Deployed%20With-Vercel-black?style=for-the-badge&logo=vercel)](https://endsem2prep.vercel.app/)
@@ -135,3 +139,6 @@ Bring this interactive book to your local system in just a few steps:
 
 * **Creator:** Designed, written, and structured by `~prats` (2026 Semester 2).
 * **Feedback:** Contributions to improve clarity, fix concept details, or expand sample exam questions are highly appreciated! Please submit an issue or open a pull request.
+<p align="center">
+  <img src="assets/readme/footer.png" alt="exam-prep-book footer" width="700"/>
+</p>
